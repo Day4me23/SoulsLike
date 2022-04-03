@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Roll/Dash/Jump",
+                    "name": "RollDashJump",
                     "type": "Button",
                     "id": "8caf52a8-32ac-4546-9f74-8c998f88cada",
                     "expectedControlType": "Button",
@@ -270,7 +270,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Roll/Dash/Jump",
+                    "action": "RollDashJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -281,7 +281,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Roll/Dash/Jump",
+                    "action": "RollDashJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

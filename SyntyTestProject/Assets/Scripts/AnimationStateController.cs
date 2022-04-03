@@ -5,19 +5,17 @@ using UnityEngine.InputSystem;
 
 public class AnimationStateController : MonoBehaviour
 {
-    Animator _animator;
-    public void OnMove(InputValue inputValue)
+    private Animator _animator;
+    private PlayerInput _playerInput;
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Movement Detected");
-        Vector2 movementInput = inputValue.Get<Vector2>();
-        if (movementInput == Vector2.zero)
-            _animator.SetBool("isWalking", false);
-        else if (movementInput.y > 0)
+        if (ctx.performed)
             _animator.SetBool("isWalking", true);
+        else if (ctx.canceled)
+            _animator.SetBool("isWalking", false);
     }
     public void OnRollDashJump(InputAction.CallbackContext ctx)
     {
-        Debug.Log(ctx);
         if(ctx.performed)
             _animator.SetBool("isRunning", true);
         else if(ctx.canceled)
@@ -26,6 +24,11 @@ public class AnimationStateController : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _playerInput = FindObjectOfType<PlayerInput>();
+        _playerInput.actions["RollDashJump"].performed += OnRollDashJump;
+        _playerInput.actions["RollDashJump"].canceled += OnRollDashJump;
+        _playerInput.actions["Move"].performed += OnMove;
+        _playerInput.actions["Move"].canceled += OnMove;
     }
 
     // Update is called once per frame
