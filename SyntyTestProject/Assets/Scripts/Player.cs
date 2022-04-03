@@ -5,36 +5,36 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public void OnRightWeaponLightAttack(InputAction.CallbackContext context) {
+    public void OnRightWeaponLightAttack(InputValue inputValue) {
         //Attack Actions
     }
-    public void OnRightWeaponHeavyAttack(InputAction.CallbackContext context) {
+    public void OnRightWeaponHeavyAttack(InputValue inputValue) {
         //Attack Actions
     }
-    public void OnMove(InputAction.CallbackContext context) {
+    public void OnMove(InputValue inputValue) {
         //Move Actions
     }
-    public void OnLook(InputAction.CallbackContext context) {
+    public void OnLook(InputValue inputValue) {
         //Look Actions
     }
-    public void OnUseItem(InputAction.CallbackContext context) {
+    public void OnUseItem(InputValue inputValue) {
         //Use
     }
-    public void OnInteract(InputAction.CallbackContext context) {
+    public void OnInteract(InputValue inputValue) {
         //Interact
     }
-    public void OnRollDashJump(InputAction.CallbackContext context) {        
+    public void OnRollDashJump(InputValue inputValue) {        
         //Tap to roll
         //Hold to Dash
         //Tap while Dashing to jump
     }
-    public void OnBlockLeftWeaponLightAttack(InputAction.CallbackContext context) {
+    public void OnBlockLeftWeaponLightAttack(InputValue inputValue) {
         //Block or Light Attack
     }
-    public void OnParryLeftWeaponHeavyAttack(InputAction.CallbackContext context) {
+    public void OnParryLeftWeaponHeavyAttack(InputValue inputValue) {
         //Parry or Heavy Left
     }
-    public void OnMenu(InputAction.CallbackContext context) {
+    public void OnMenu(InputValue inputValue) {
         //Open Menu
     }
 }
