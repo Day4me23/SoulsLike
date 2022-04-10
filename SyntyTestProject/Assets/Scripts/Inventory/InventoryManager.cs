@@ -7,7 +7,7 @@ using TMPro;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject slotHolder;
-    public List<Slot> items = new List<Slot>();
+    public List<Items> items = new List<Items>();
     [SerializeField] private Items itemToAdd;
     [SerializeField] private Items itemToRemove;
     private GameObject[] slots;
@@ -32,58 +32,32 @@ public class InventoryManager : MonoBehaviour
             try
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].GetItem().itemIcon;
-                //slots[i].transform.GetChild(1).GetComponent<Text>().text = items[i].GetQuantity().ToString();
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemIcon;
             }
             catch
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
-                //slots[i].transform.GetChild(1).GetComponent<Text>().text = "";
-
             }
         }
     }
-    public void Add(Items item)
+    public bool Add(Items item)
     {
-        // items.Add(item);
-        Slot slot = Contains(item);
-        if (slot != null)
+        if (items.Count < slots.Length)
         {
-            slot.AddQuantity(1);
+            items.Add(item);
         }
         else
         {
-            items.Add(new Slot(item, 1));
+            return false;
         }
         RefreshUI();
+        return true;
     }
 
     public void Remove(Items item)
     {
-        // items.Remove(item);
-        Slot slotToRemove = new Slot();
-        foreach (Slot slot in items)
-        {
-            if (slot.GetItem() == item)
-            {
-                slotToRemove = slot;
-                break;
-            }
-        }
-        items.Remove(slotToRemove);
+        items.Remove(item);
         RefreshUI();
-    }
-
-    public Slot Contains(Items item)
-    {
-        foreach (Slot slot in items)
-        {
-            if (slot.GetItem() == item)
-            {
-                return slot;
-            }
-        }
-        return null;
     }
 }
