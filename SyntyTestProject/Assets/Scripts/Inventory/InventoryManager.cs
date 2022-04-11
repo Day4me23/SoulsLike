@@ -60,4 +60,9 @@ public class InventoryManager : MonoBehaviour
         items.Remove(item);
         RefreshUI();
     }
+
+    public void DisplayItem(Items item)
+    {
+        Debug.Log("Displaying item information for - " + item);
+    }
 }
