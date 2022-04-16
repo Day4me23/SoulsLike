@@ -10,9 +10,28 @@ public class InputHandler : MonoBehaviour
     public float moveAmount;
     public float mouseX;
     public float mouseY;
+
     Character inputActions;
+    CameraHandler cameraHandler;
+
     Vector2 movementInput;
     Vector2 cameraInput;
+    private void Awake() {
+        cameraHandler = CameraHandler.singleton;
+    }
+    private void Update() {
+        float delta = Time.deltaTime;
+        if (cameraHandler != null) {
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
+        }
+    }
+    private void FixedUpdate() {
+        float delta = Time.fixedDeltaTime;
+        if (cameraHandler != null) {
+            cameraHandler.HandleCameraCollisions(delta);
+        }
+    }
     public void OnEnable() {
         if(inputActions == null) {
             inputActions = new Character();
