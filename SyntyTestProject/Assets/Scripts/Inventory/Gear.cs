@@ -7,7 +7,10 @@ public class Gear : Items
 {
     [Header("Gear")]
     public GearType gearType;
-    
+    public enum GearType
+    {
+        head, chest, legs, cape, feet, hands
+    }
     public override Items GetItem()
     {
         return this;
@@ -24,8 +27,4 @@ public class Gear : Items
     {
         return this;
     }
-}
-public enum GearType
-{
-    head, chest, legs, cape, feet, hands
 }
