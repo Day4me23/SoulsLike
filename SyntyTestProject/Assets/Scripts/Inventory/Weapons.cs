@@ -7,10 +7,7 @@ public class Weapons : Items
 {
     [Header("Weapons")]
     public WeaponType weaponType;
-    public enum WeaponType
-    {
-        sword, axe, dagger, greatsword, greataxe
-    }
+    
     public override Items GetItem()
     {
         return this;
@@ -27,4 +24,8 @@ public class Weapons : Items
     {
         return null;
     }
+}
+public enum WeaponType
+{
+    sword, axe, dagger, greatsword, greataxe
 }

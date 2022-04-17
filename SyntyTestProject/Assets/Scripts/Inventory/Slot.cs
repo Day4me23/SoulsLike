@@ -1,34 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class Slot
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField]private Items item;
-    [SerializeField]private int quantity;
+    [SerializeField] int slotNum;
+    [SerializeField] Image image;
+    private InventoryManager inventory;
 
-    public Slot()
+    private void Update()
     {
-        item = null;
-        quantity = 0;
+        if (inventory.items.Count <= slotNum)
+            image.sprite = null;
+        else
+            image.sprite = inventory.items[slotNum].itemIcon;
     }
-    public Slot (Items _item, int _quantity)
+    private void Start()
     {
-        item = _item;
-        quantity = _quantity;
+        inventory = InventoryManager.instance;
     }
-
-    public Items GetItem()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        return item;
+        if (inventory.items.Count > slotNum)
+            inventory.AddDisplay(slotNum);
+        Debug.Log(slotNum);
+        
     }
-    public int GetQuantity()
-    {
-        return quantity;
-    }
-    public void AddQuantity(int _quantity)
-    {
-        quantity += _quantity;
-    }
-
 }
