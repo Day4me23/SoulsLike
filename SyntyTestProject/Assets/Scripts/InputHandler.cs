@@ -22,16 +22,11 @@ public class InputHandler : MonoBehaviour
     private void Awake() {
         cameraHandler = CameraHandler.singleton;
     }
-    private void Update() {
-        float delta = Time.deltaTime;
-        if (cameraHandler != null) {
-            cameraHandler.FollowTarget(delta);
-            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-        }
-    }
     private void FixedUpdate() {
         float delta = Time.fixedDeltaTime;
         if (cameraHandler != null) {
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
             cameraHandler.HandleCameraCollisions(delta);
         }
     }
