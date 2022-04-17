@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782f629a2df6243629ea8fe2873666a4, type: 3}
   m_Name: SampleRenderTexturePanelAsset
   m_EditorClassIdentifier: 
-  themeUss: {fileID: -4733365628477956816, guid: 16b7240b964cb4df7bbdc8d93e3240db, type: 3}
+  themeUss: {fileID: -4733365628477956816, guid: 8cccb32fa95ea3b4893dba27d9f7cf59, type: 3}
   m_TargetTexture: {fileID: 8400000, guid: 592fcc6e10aa48b4291cd09f2ab00123, type: 2}
   m_ScaleMode: 2
   m_Scale: 1

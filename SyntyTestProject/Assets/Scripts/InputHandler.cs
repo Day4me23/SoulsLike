@@ -26,8 +26,12 @@ public class InputHandler : MonoBehaviour
         float delta = Time.fixedDeltaTime;
         if (cameraHandler != null) {
             cameraHandler.FollowTarget(delta);
+        }
+    }
+    private void Update() {
+        float delta = Time.deltaTime;
+        if (cameraHandler != null) {
             cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            cameraHandler.HandleCameraCollisions(delta);
         }
     }
     public void OnEnable() {

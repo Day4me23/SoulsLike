@@ -30,6 +30,7 @@ public class CameraHandler : MonoBehaviour
     public float minimumCollisionOffset = 0.2f;
 
     private void Awake() {
+        Cursor.lockState = CursorLockMode.Locked;
         singleton = this;
         myTransform = transform;
         defaultPosition = cameraTransform.localPosition.z;
@@ -41,16 +42,16 @@ public class CameraHandler : MonoBehaviour
         HandleCameraCollisions(delta);
     }
     public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput) {
-        lookAngle += (mouseXInput * lookSpeed) / delta;
+        lookAngle += (mouseXInput * lookSpeed) / delta; //Set look and pivot angles based on input, clamp pivot
         pivotAngle -= (mouseYInput * pivotSpeed) / delta;
         pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
 
-        Vector3 rotation = Vector3.zero;
+        Vector3 rotation = Vector3.zero; //Set camera holder rotation to mouse Y(left-right) rotation
         rotation.y = lookAngle;
         Quaternion targetRotation = Quaternion.Euler(rotation);
         myTransform.rotation = targetRotation;
 
-        rotation = Vector3.zero;
+        rotation = Vector3.zero; //ser camera pivot rotation to mouse X(up-down) rotation
         rotation.x = pivotAngle;
         targetRotation = Quaternion.Euler(rotation);
         cameraPivotTransform.localRotation = targetRotation;
