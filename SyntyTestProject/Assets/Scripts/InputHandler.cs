@@ -16,11 +16,13 @@ public class InputHandler : MonoBehaviour
 
     Character inputActions;
     CameraHandler cameraHandler;
+    Animator anim;
 
     Vector2 movementInput;
     Vector2 cameraInput;
     private void Start() {
         cameraHandler = CameraHandler.singleton;
+        anim = GetComponentInChildren<Animator>();
     }
     private void FixedUpdate() {
         float delta = Time.fixedDeltaTime;
@@ -33,6 +35,8 @@ public class InputHandler : MonoBehaviour
         if (cameraHandler != null) {
             cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
         }
+        isInteracting = anim.GetBool("isInteracting");
+        rollFlag = false;
     }
     public void OnEnable() {
         if(inputActions == null) {
