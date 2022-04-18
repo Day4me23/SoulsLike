@@ -18,3 +18,4 @@ MonoBehaviour:
   damage: 0
   health: 20
   gearType: 2
+  isEquipped: 0
