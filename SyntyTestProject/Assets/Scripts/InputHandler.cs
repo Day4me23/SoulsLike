@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
 
     Vector2 movementInput;
     Vector2 cameraInput;
-    private void Awake() {
+    private void Start() {
         cameraHandler = CameraHandler.singleton;
     }
     private void FixedUpdate() {
@@ -48,8 +48,10 @@ public class InputHandler : MonoBehaviour
         inputActions.Disable();
     }
     public void TickInput(float delta) {
-        MoveInput(delta);
-        HandleRollInput(delta);
+        if (!isInteracting) {
+            MoveInput(delta);
+            HandleRollInput(delta);
+        }        
     }
     private void MoveInput(float delta) {
         horizontal = movementInput.x;
