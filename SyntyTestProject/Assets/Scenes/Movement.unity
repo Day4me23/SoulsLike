@@ -837,9 +837,9 @@ MonoBehaviour:
   targetTransform: {fileID: 631045641}
   cameraTransform: {fileID: 952740930}
   cameraPivotTransform: {fileID: 246637324}
-  lookSpeed: 0.03
+  lookSpeed: 0.003
   followSpeed: 0.3
-  pivotSpeed: 0.03
+  pivotSpeed: 0.003
   minimumPivot: -35
   maximumPivot: 55
   cameraSphereRadius: 0.2

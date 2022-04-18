@@ -50,7 +50,8 @@ public class PlayerLocomotion : MonoBehaviour
         float rs = rotationSpeed;
         Quaternion tr = Quaternion.LookRotation(targetDir);
         Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
-        myTransform.rotation = targetRotation;
+        if(!inputHandler.isInteracting)
+            myTransform.rotation = targetRotation;
     }
     public void HandleMovement(float delta) {
         moveDirection = cameraObject.forward * inputHandler.vertical;

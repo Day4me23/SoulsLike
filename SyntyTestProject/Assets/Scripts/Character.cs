@@ -118,7 +118,7 @@ public class @Character : IInputActionCollection, IDisposable
                     ""id"": ""dab53520-1071-4cbc-ac0f-0708a527f06c"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
