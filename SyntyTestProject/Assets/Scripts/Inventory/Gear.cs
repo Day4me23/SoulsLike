@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Item/Gear")]
 public class Gear : Items
 {
-    [Header("Gear")]
-    public GearType gearType;
+    
     
     public override Items GetItem()
     {
@@ -25,7 +24,4 @@ public class Gear : Items
         return this;
     }
 }
-public enum GearType
-{
-    head, chest, legs, cape, feet, hands
-}
+

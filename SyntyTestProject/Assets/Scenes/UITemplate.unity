@@ -1925,6 +1925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524278709}
   - component: {fileID: 524278711}
+  - component: {fileID: 524278712}
   - component: {fileID: 524278710}
   m_Layer: 5
   m_Name: EquipButton
@@ -1994,6 +1995,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524278708}
   m_CullTransparentMesh: 1
+--- !u!114 &524278712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524278708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 524278710}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1143676849}
+        m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
+        m_MethodName: Equip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &546243261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4784,7 +4841,7 @@ GameObject:
   - component: {fileID: 1143676850}
   - component: {fileID: 1143676849}
   m_Layer: 0
-  m_Name: InventoryObject
+  m_Name: PlayerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4806,7 +4863,7 @@ MonoBehaviour:
   items:
   - {fileID: 11400000, guid: e1c8c51bba93add44bc4f7acc481d8b3, type: 2}
   - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
-  - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
+  - {fileID: 11400000, guid: f4d48be16de6d5349914fc458ba42cf0, type: 2}
   - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
   - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
   - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
@@ -4821,7 +4878,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
   itemToAdd: {fileID: 11400000, guid: 81ace9204125baa489ff89141cd1bd47, type: 2}
   itemToRemove: {fileID: 11400000, guid: 43842ca17e5e980449ef9cec4717a611, type: 2}
-  item: {fileID: 0}
+  equipment: []
+  health: 0
+  damage: 0
+  displayItem: {fileID: 0}
   nameText: {fileID: 1603457213}
   descriptionText: {fileID: 1560104778}
   itemInfoText: {fileID: 821684083}

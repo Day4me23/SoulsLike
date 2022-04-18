@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     #region singleton
-    public static InventoryManager instance;
+    public static PlayerManager instance;
     private void Awake()
     {
         instance = this;   
@@ -18,7 +18,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Items itemToAdd;
     [SerializeField] private Items itemToRemove;
     private GameObject[] slots;
-    private Items[] equipment;
+    public Items[] equipment;
+    public int health = 0;
+    public int damage = 0;
 
 
     //This is where you would send itemToAdd and Remove... NOT IN START
@@ -79,10 +81,18 @@ public class InventoryManager : MonoBehaviour
 
     public void Equip()
     {
-
+        if (displayItem.isEquipped)
+            return;
+        if (equipment[(int)displayItem.gearType] != null)
+            equipment[(int)displayItem.gearType].UnEquip();
+        Debug.Log(displayItem);
+        displayItem.Equip();
+        //displayItem = null;
+        
     }
+
     [Header("Item Display")]
-    public Items item;
+    public Items displayItem;
     public Text nameText;
     public Text descriptionText;
     public Text itemInfoText;
@@ -90,18 +100,23 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (item == null)
+        if (displayItem == null)
             return;
 
-        item.Print();
-        itemImage.sprite = item.itemIcon;
-        nameText.text = "Name: " + item.name;
-        descriptionText.text = "Description: " + item.itemDescription;
-        itemInfoText.text = "Damage: " + item.damage;
+        displayItem.Print();
+        itemImage.sprite = displayItem.itemIcon;
+        nameText.text = "Name: " + displayItem.name;
+        descriptionText.text = "Description: " + displayItem.itemDescription;
+        if (displayItem.gearType == GearType.weapon)
+            itemInfoText.text = "Damage: " + displayItem.damage;
+        else
+            itemInfoText.text = "Armour: " + displayItem.health;
     }
 
     public void AddDisplay(int slotNum)
     {
-        item = items[slotNum];
+        displayItem = items[slotNum];
     }
+
+   
 }

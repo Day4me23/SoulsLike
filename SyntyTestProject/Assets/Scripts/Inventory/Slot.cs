@@ -6,7 +6,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] int slotNum;
     [SerializeField] Image image;
-    private InventoryManager inventory;
+    private PlayerManager inventory;
 
     private void Update()
     {
@@ -17,7 +17,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     }
     private void Start()
     {
-        inventory = InventoryManager.instance;
+        inventory = PlayerManager.instance;
     }
     public void OnPointerClick(PointerEventData eventData)
     {
