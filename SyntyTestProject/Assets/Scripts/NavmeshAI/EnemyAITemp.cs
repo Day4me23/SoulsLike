@@ -4,12 +4,14 @@ using UnityEngine.AI;
 public class EnemyAITemp : MonoBehaviour
 {
     public NavMeshAgent agent;
+    public PlayerManager playerStats;
 
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float health;
+    public int damage = 10;
 
     //Patroling
     public Vector3 walkPoint;
@@ -27,7 +29,7 @@ public class EnemyAITemp : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerObj").transform;
+        player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -82,9 +84,11 @@ public class EnemyAITemp : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Debug.Log("Dealt Damage: " + damage);
+            //playerStats.health -= damage;
+            /*Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            rb.AddForce(transform.up * 8f, ForceMode.Impulse);*/
             ///End of attack code
 
             alreadyAttacked = true;
