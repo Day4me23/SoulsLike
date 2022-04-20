@@ -5,8 +5,9 @@ using UnityEngine;
 public class AnimatorHandler : MonoBehaviour
 {
     public Animator anim;
-    public InputHandler inputHandler;
-    public PlayerLocomotion locomotion;
+    private InputHandler inputHandler;
+    private PlayerLocomotion locomotion;
+    private PlayerStateManager playerStateManager;
 
     int vertical;
     int horizontal;
@@ -17,8 +18,9 @@ public class AnimatorHandler : MonoBehaviour
         locomotion = GetComponentInParent<PlayerLocomotion>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
+        playerStateManager = GetComponentInParent<PlayerStateManager>();
     }
-    public void UpdateAnimatorValue(float verticalMovement, float horizontalMovement) {
+    public void UpdateAnimatorValue(float verticalMovement, float horizontalMovement, bool isSprinting) {
         #region vertical
         float v = 0f;
         if (verticalMovement > 0 && verticalMovement < 0.55f) {
@@ -49,6 +51,11 @@ public class AnimatorHandler : MonoBehaviour
         }
         #endregion
 
+        if (isSprinting) {
+            v = 2;
+            h = horizontalMovement;
+        }
+
         anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
         anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
@@ -64,7 +71,7 @@ public class AnimatorHandler : MonoBehaviour
         canRotate = false;
     }
     private void OnAnimatorMove() {
-        if (!inputHandler.isInteracting)
+        if (!playerStateManager.isInteracting)
             return;
         float delta = Time.deltaTime;
         locomotion.rigidbody.drag = 0;

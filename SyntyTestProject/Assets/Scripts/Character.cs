@@ -193,6 +193,14 @@ public class @Character : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""2380ee82-259b-4987-be19-99a615d30e8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -371,6 +379,28 @@ public class @Character : IInputActionCollection, IDisposable
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fae44f18-eed4-438f-b5fc-495ebc213bf4"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4bca618-01c2-4c49-964f-9751f4ef90c5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -391,6 +421,7 @@ public class @Character : IInputActionCollection, IDisposable
         m_PlayerActions_BlockLeftWeaponLightAttack = m_PlayerActions.FindAction("Block/Left Weapon Light Attack", throwIfNotFound: true);
         m_PlayerActions_ParryLeftWeaponHeavyAttack = m_PlayerActions.FindAction("Parry/Left Weapon Heavy Attack", throwIfNotFound: true);
         m_PlayerActions_Menu = m_PlayerActions.FindAction("Menu", throwIfNotFound: true);
+        m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -489,6 +520,7 @@ public class @Character : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_BlockLeftWeaponLightAttack;
     private readonly InputAction m_PlayerActions_ParryLeftWeaponHeavyAttack;
     private readonly InputAction m_PlayerActions_Menu;
+    private readonly InputAction m_PlayerActions_Sprint;
     public struct PlayerActionsActions
     {
         private @Character m_Wrapper;
@@ -501,6 +533,7 @@ public class @Character : IInputActionCollection, IDisposable
         public InputAction @BlockLeftWeaponLightAttack => m_Wrapper.m_PlayerActions_BlockLeftWeaponLightAttack;
         public InputAction @ParryLeftWeaponHeavyAttack => m_Wrapper.m_PlayerActions_ParryLeftWeaponHeavyAttack;
         public InputAction @Menu => m_Wrapper.m_PlayerActions_Menu;
+        public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -534,6 +567,9 @@ public class @Character : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -562,6 +598,9 @@ public class @Character : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -581,5 +620,6 @@ public class @Character : IInputActionCollection, IDisposable
         void OnBlockLeftWeaponLightAttack(InputAction.CallbackContext context);
         void OnParryLeftWeaponHeavyAttack(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }
