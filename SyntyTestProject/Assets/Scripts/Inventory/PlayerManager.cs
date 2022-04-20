@@ -118,5 +118,17 @@ public class PlayerManager : MonoBehaviour
         displayItem = items[slotNum];
     }
 
-   
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) Invoke(nameof(DestroyPlayer), 0.5f);
+    }
+
+    public void DestroyPlayer()
+    {
+        Debug.Log("Player Dead");
+    }
+
+
 }
