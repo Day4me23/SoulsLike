@@ -19,6 +19,8 @@ public class InputHandler : MonoBehaviour
     public bool sprintFlag;
     public bool estusFlag;
 
+    public GameObject menu;
+
     Character inputActions;
     PlayerAttack playerAttack;
 
@@ -40,6 +42,13 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.UseItem.performed += ctx => estusFlag = true;
             inputActions.PlayerActions.RightWeaponLightAttack.performed += ctx => la_Input = true;
             inputActions.PlayerActions.RightWeaponHeavyAttack.performed += ctx => ha_Input = true;
+            inputActions.PlayerActions.Menu.performed += ctx => {
+                menu.SetActive(!menu.activeInHierarchy);
+                if(Cursor.lockState == CursorLockMode.Locked)
+                    Cursor.lockState = CursorLockMode.None;
+                else
+                    Cursor.lockState = CursorLockMode.Locked;
+            };
 
         }
         inputActions.Enable();
