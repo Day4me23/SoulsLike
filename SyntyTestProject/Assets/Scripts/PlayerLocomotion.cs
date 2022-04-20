@@ -79,6 +79,7 @@ public class PlayerLocomotion : MonoBehaviour
                 animatorHandler.PlayTargetAnimation("Rolling", true);
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
+                myTransform.eulerAngles = new Vector3(0f, myTransform.eulerAngles.y, myTransform.eulerAngles.z);
             } else {
                 animatorHandler.PlayTargetAnimation("Backstep", true);
             }
