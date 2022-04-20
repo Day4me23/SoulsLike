@@ -12,14 +12,21 @@ public class InputHandler : MonoBehaviour
     public float mouseY;
 
     public bool b_Input;
+    public bool la_Input;
+    public bool ha_Input;
 
     public bool rollFlag;
     public bool sprintFlag;
+    public bool estusFlag;
 
     Character inputActions;
+    PlayerAttack playerAttack;
 
     Vector2 movementInput;
-    Vector2 cameraInput;    
+    Vector2 cameraInput;
+    private void Awake() {
+        playerAttack = GetComponent<PlayerAttack>();
+    }
     public void OnEnable() {
         if(inputActions == null) {
             inputActions = new Character();
@@ -30,6 +37,10 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.Roll.performed += ctx => rollFlag = true;
             inputActions.PlayerActions.Sprint.performed += ctx => sprintFlag = true;
             inputActions.PlayerActions.Sprint.canceled += ctx => sprintFlag = false;
+            inputActions.PlayerActions.UseItem.performed += ctx => estusFlag = true;
+            inputActions.PlayerActions.RightWeaponLightAttack.performed += ctx => la_Input = true;
+            inputActions.PlayerActions.RightWeaponHeavyAttack.performed += ctx => ha_Input = true;
+
         }
         inputActions.Enable();
     }
@@ -38,6 +49,7 @@ public class InputHandler : MonoBehaviour
     }
     public void TickInput(float delta) {
         MoveInput(delta);
+        AttackInput(delta);
     }
     private void MoveInput(float delta) {
         horizontal = movementInput.x;
@@ -45,5 +57,12 @@ public class InputHandler : MonoBehaviour
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
         mouseX = cameraInput.x;
         mouseY = cameraInput.y;
+    }
+    private void AttackInput(float delta) {
+        if (la_Input) {
+            playerAttack.HandleLightAttack();
+        } else if (ha_Input) {
+            playerAttack.HandleHeavyAttack();
+        }
     }
 }

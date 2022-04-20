@@ -139,6 +139,22 @@ public class @Character : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""2380ee82-259b-4987-be19-99a615d30e8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""8255132c-047e-4ae8-8ca5-a1aee4ba0297"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Right Weapon Light Attack"",
                     ""type"": ""Button"",
                     ""id"": ""1e94f0db-bc8d-45fe-a383-a65b21b4522e"",
@@ -150,14 +166,6 @@ public class @Character : IInputActionCollection, IDisposable
                     ""name"": ""Right Weapon Heavy Attack"",
                     ""type"": ""Button"",
                     ""id"": ""161beb86-30eb-443c-bba4-a790b6cf15ef"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Use Item"",
-                    ""type"": ""Button"",
-                    ""id"": ""8255132c-047e-4ae8-8ca5-a1aee4ba0297"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -190,14 +198,6 @@ public class @Character : IInputActionCollection, IDisposable
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""65d3cd39-3588-4324-b17f-216b0ac1eb3a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Sprint"",
-                    ""type"": ""Button"",
-                    ""id"": ""2380ee82-259b-4987-be19-99a615d30e8d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -245,28 +245,6 @@ public class @Character : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Right Weapon Heavy Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""17e163be-8836-4385-843e-0563e2bcbf56"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Use Item"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f0e5c3d7-369d-4d84-881a-dbb4182920fc"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Use Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -401,6 +379,28 @@ public class @Character : IInputActionCollection, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17e163be-8836-4385-843e-0563e2bcbf56"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0e5c3d7-369d-4d84-881a-dbb4182920fc"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -414,14 +414,14 @@ public class @Character : IInputActionCollection, IDisposable
         // Player Actions
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
+        m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerActions_UseItem = m_PlayerActions.FindAction("Use Item", throwIfNotFound: true);
         m_PlayerActions_RightWeaponLightAttack = m_PlayerActions.FindAction("Right Weapon Light Attack", throwIfNotFound: true);
         m_PlayerActions_RightWeaponHeavyAttack = m_PlayerActions.FindAction("Right Weapon Heavy Attack", throwIfNotFound: true);
-        m_PlayerActions_UseItem = m_PlayerActions.FindAction("Use Item", throwIfNotFound: true);
         m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActions_BlockLeftWeaponLightAttack = m_PlayerActions.FindAction("Block/Left Weapon Light Attack", throwIfNotFound: true);
         m_PlayerActions_ParryLeftWeaponHeavyAttack = m_PlayerActions.FindAction("Parry/Left Weapon Heavy Attack", throwIfNotFound: true);
         m_PlayerActions_Menu = m_PlayerActions.FindAction("Menu", throwIfNotFound: true);
-        m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -513,27 +513,27 @@ public class @Character : IInputActionCollection, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
     private readonly InputAction m_PlayerActions_Roll;
+    private readonly InputAction m_PlayerActions_Sprint;
+    private readonly InputAction m_PlayerActions_UseItem;
     private readonly InputAction m_PlayerActions_RightWeaponLightAttack;
     private readonly InputAction m_PlayerActions_RightWeaponHeavyAttack;
-    private readonly InputAction m_PlayerActions_UseItem;
     private readonly InputAction m_PlayerActions_Interact;
     private readonly InputAction m_PlayerActions_BlockLeftWeaponLightAttack;
     private readonly InputAction m_PlayerActions_ParryLeftWeaponHeavyAttack;
     private readonly InputAction m_PlayerActions_Menu;
-    private readonly InputAction m_PlayerActions_Sprint;
     public struct PlayerActionsActions
     {
         private @Character m_Wrapper;
         public PlayerActionsActions(@Character wrapper) { m_Wrapper = wrapper; }
         public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
+        public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
+        public InputAction @UseItem => m_Wrapper.m_PlayerActions_UseItem;
         public InputAction @RightWeaponLightAttack => m_Wrapper.m_PlayerActions_RightWeaponLightAttack;
         public InputAction @RightWeaponHeavyAttack => m_Wrapper.m_PlayerActions_RightWeaponHeavyAttack;
-        public InputAction @UseItem => m_Wrapper.m_PlayerActions_UseItem;
         public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputAction @BlockLeftWeaponLightAttack => m_Wrapper.m_PlayerActions_BlockLeftWeaponLightAttack;
         public InputAction @ParryLeftWeaponHeavyAttack => m_Wrapper.m_PlayerActions_ParryLeftWeaponHeavyAttack;
         public InputAction @Menu => m_Wrapper.m_PlayerActions_Menu;
-        public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -546,15 +546,18 @@ public class @Character : IInputActionCollection, IDisposable
                 @Roll.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
                 @Roll.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
                 @Roll.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
                 @RightWeaponLightAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponLightAttack;
                 @RightWeaponLightAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponLightAttack;
                 @RightWeaponLightAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponLightAttack;
                 @RightWeaponHeavyAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponHeavyAttack;
                 @RightWeaponHeavyAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponHeavyAttack;
                 @RightWeaponHeavyAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRightWeaponHeavyAttack;
-                @UseItem.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
-                @UseItem.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
-                @UseItem.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnUseItem;
                 @Interact.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInteract;
@@ -567,9 +570,6 @@ public class @Character : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
-                @Sprint.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -577,15 +577,18 @@ public class @Character : IInputActionCollection, IDisposable
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
                 @RightWeaponLightAttack.started += instance.OnRightWeaponLightAttack;
                 @RightWeaponLightAttack.performed += instance.OnRightWeaponLightAttack;
                 @RightWeaponLightAttack.canceled += instance.OnRightWeaponLightAttack;
                 @RightWeaponHeavyAttack.started += instance.OnRightWeaponHeavyAttack;
                 @RightWeaponHeavyAttack.performed += instance.OnRightWeaponHeavyAttack;
                 @RightWeaponHeavyAttack.canceled += instance.OnRightWeaponHeavyAttack;
-                @UseItem.started += instance.OnUseItem;
-                @UseItem.performed += instance.OnUseItem;
-                @UseItem.canceled += instance.OnUseItem;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -598,9 +601,6 @@ public class @Character : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -613,13 +613,13 @@ public class @Character : IInputActionCollection, IDisposable
     public interface IPlayerActionsActions
     {
         void OnRoll(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
         void OnRightWeaponLightAttack(InputAction.CallbackContext context);
         void OnRightWeaponHeavyAttack(InputAction.CallbackContext context);
-        void OnUseItem(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnBlockLeftWeaponLightAttack(InputAction.CallbackContext context);
         void OnParryLeftWeaponHeavyAttack(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
     }
 }

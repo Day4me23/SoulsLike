@@ -31,7 +31,7 @@ public class PlayerStateManager : MonoBehaviour
         inputHandler.TickInput(delta);
         locomotion.HandleMovement(delta);
         locomotion.HandleRollingAndSprinting(delta);
-        
+        locomotion.HandleEstus();
     }
     private void FixedUpdate() {
         float delta = Time.fixedDeltaTime;
@@ -40,8 +40,10 @@ public class PlayerStateManager : MonoBehaviour
             cameraHandler.FollowTarget(delta);
     }
     private void LateUpdate() {
-        isSprinting = inputHandler.sprintFlag;
         inputHandler.rollFlag = false;
+        inputHandler.estusFlag = false;
+        inputHandler.la_Input = false;
+        inputHandler.ha_Input = false;
         if (isInAir)
             locomotion.inAirTimer += Time.deltaTime;
     }

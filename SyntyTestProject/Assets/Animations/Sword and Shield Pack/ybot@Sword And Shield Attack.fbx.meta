@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 6866099c223d50a4297484acb16e93c6
+guid: 169cd223a142ad440a0ef64fe31c290d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: Sword And Shield Attack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -26,7 +26,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Sword And Shield Attack
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 104
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -104,17 +104,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 4d77c4a309f7ef540b34f333511743d6
-  - 20d7edf9e87a6fc4582a04bbeec314fb
-  - 2b6efd777afbf6442a69136ef78aab6b
-  - e291869a3d8788c4b9b6c2e04de7cadc
-  - 00ec9049d727d494c9440559a58fd76d
-  - 169cd223a142ad440a0ef64fe31c290d
-  - d09479de9101e0349940374f8ec65f8c
-  - b73256c190038f44fa4dc40f1a4fd390
-  - 608e463cd455dc6459010f78bf861692
-  - a82e373fc7d809d4d8c617629ee12251
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -898,11 +888,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 6866099c223d50a4297484acb16e93c6, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 

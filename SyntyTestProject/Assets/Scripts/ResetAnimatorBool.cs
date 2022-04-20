@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetIsInteracting : StateMachineBehaviour
+public class ResetAnimatorBool : StateMachineBehaviour
 {
+    public string _name;
+    public bool status;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("isInteracting", false);
+        animator.SetBool(_name, status);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

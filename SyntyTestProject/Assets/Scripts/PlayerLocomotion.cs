@@ -72,9 +72,11 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection.y = 0;
 
         float speed = movementSpeed;
-        if (inputHandler.sprintFlag) {
+        if (inputHandler.sprintFlag && inputHandler.moveAmount > .5f) {
             speed = sprintSpeed;
             playerStateManager.isSprinting = true;
+        } else {
+            playerStateManager.isSprinting = false;
         }
         moveDirection *= speed;
 
@@ -111,7 +113,7 @@ public class PlayerLocomotion : MonoBehaviour
             moveDirection = Vector3.zero;
         if (playerStateManager.isInAir) {
             rigidbody.AddForce(Vector3.down * fallingSpeed);
-            if(inAirTimer < 0.5f)
+            if(inAirTimer < 0.3f)
                 rigidbody.AddForce(moveDirection * fallingSpeed / 3f); 
         }
         Vector3 dir = moveDirection;
@@ -157,4 +159,13 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
     #endregion
+
+    public void HandleEstus() {
+        if (inputHandler.estusFlag) {
+            if(!playerStateManager.isInteracting) {
+                animatorHandler.PlayTargetAnimation("Heal", true);
+               //Increase health, decrease flasks
+            }
+        }
+    }
 }

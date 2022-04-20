@@ -126,6 +126,22 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "2380ee82-259b-4987-be19-99a615d30e8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "8255132c-047e-4ae8-8ca5-a1aee4ba0297",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Right Weapon Light Attack",
                     "type": "Button",
                     "id": "1e94f0db-bc8d-45fe-a383-a65b21b4522e",
@@ -137,14 +153,6 @@
                     "name": "Right Weapon Heavy Attack",
                     "type": "Button",
                     "id": "161beb86-30eb-443c-bba4-a790b6cf15ef",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Use Item",
-                    "type": "Button",
-                    "id": "8255132c-047e-4ae8-8ca5-a1aee4ba0297",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -177,14 +185,6 @@
                     "name": "Menu",
                     "type": "Button",
                     "id": "65d3cd39-3588-4324-b17f-216b0ac1eb3a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "2380ee82-259b-4987-be19-99a615d30e8d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -232,28 +232,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Right Weapon Heavy Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "17e163be-8836-4385-843e-0563e2bcbf56",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Use Item",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f0e5c3d7-369d-4d84-881a-dbb4182920fc",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Use Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -386,6 +364,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17e163be-8836-4385-843e-0563e2bcbf56",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0e5c3d7-369d-4d84-881a-dbb4182920fc",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
