@@ -2376,6 +2376,7 @@ MonoBehaviour:
   rollFlag: 0
   sprintFlag: 0
   estusFlag: 0
+  menu: {fileID: 0}
 --- !u!114 &7755220519886804847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2633,7 +2634,7 @@ MeshCollider:
   m_GameObject: {fileID: 7757129448321342038}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
