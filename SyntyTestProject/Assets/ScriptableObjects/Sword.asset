@@ -18,5 +18,5 @@ MonoBehaviour:
   damage: 20
   health: 0
   gearType: 5
-  isEquipped: 0
+  isEquipped: 1
   weaponType: 0
