@@ -8,6 +8,7 @@ public class PlayerStateManager : MonoBehaviour
     Animator anim;
     CameraHandler cameraHandler;
     PlayerLocomotion locomotion;
+    public static PlayerStateManager instance;
 
     [Header("Flags")]
     public bool isInteracting;
@@ -19,6 +20,8 @@ public class PlayerStateManager : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         cameraHandler = CameraHandler.singleton;
         locomotion = GetComponent<PlayerLocomotion>();
+        if (instance == null)
+            instance = this;
     }
     private void Update() {
         float delta = Time.deltaTime;
