@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Items : ScriptableObject
 {
     [Header("Items")]
+    public GameObject prefab;
     public string itemName;
     public Sprite itemIcon;
     public string itemDescription;

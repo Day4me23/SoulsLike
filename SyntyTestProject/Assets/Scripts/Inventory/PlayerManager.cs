@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
+        
         int numOfSlots = System.Enum.GetNames(typeof(GearType)).Length;
         equipment = new Items[numOfSlots];
         slots = new GameObject[slotHolder.transform.childCount];
