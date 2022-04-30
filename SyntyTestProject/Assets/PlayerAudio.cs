@@ -23,7 +23,7 @@ public class PlayerAudio : MonoBehaviour
 
     public void Step(AnimationEvent animationEvent)
     {
-        if (animationEvent.animatorClipInfo.weight > 0.5)
+        if (animationEvent.animatorClipInfo.weight > 0.5 && !PlayerStateManager.instance.isInteracting)
         {
             AudioClip clip = GetRandomClip();
             audioSource.PlayOneShot(clip, volumeScale: 0.5f);
