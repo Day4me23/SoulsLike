@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
     public bool sprintFlag;
     public bool estusFlag;
 
-    public GameObject menu;
+    [SerializeField] GameObject menu;
 
     Character inputActions;
     PlayerAttack playerAttack;
