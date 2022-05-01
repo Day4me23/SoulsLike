@@ -12,8 +12,8 @@ public class PlayerWeapon : MonoBehaviour
         GameObject go = other.gameObject;
         if(go.layer == 9) {
             EnemyAITemp enemyAITemp = go.GetComponentInParent(typeof(EnemyAITemp)) as EnemyAITemp;
-            if(enemyAITemp != null)
-                enemyAITemp.health -= playerManager.damage;
+            if (enemyAITemp != null)
+                enemyAITemp.TakeDamage(playerManager.damage);
         }
     }
 }
