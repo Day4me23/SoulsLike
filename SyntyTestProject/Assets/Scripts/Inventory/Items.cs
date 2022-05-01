@@ -13,7 +13,7 @@ public abstract class Items : ScriptableObject
     public int health = 0;
     public GearType gearType;
     public bool isEquipped;
-
+    GameObject model;
     public abstract Items GetItem();
     public abstract Weapons GetWeapons();
     public abstract Consumable GetConsumable();
@@ -25,6 +25,15 @@ public abstract class Items : ScriptableObject
         PlayerManager.instance.damage += damage;
         Debug.Log(health + " " + damage);
         PlayerManager.instance.equipment[(int)gearType] = this;
+        if(this is Weapons w){
+            model = Instantiate(w.prefab);
+            if (model != null) {
+                model.transform.parent = PlayerManager.instance.transform;
+            }
+            model.transform.localPosition = Vector3.zero;
+            model.transform.localRotation = Quaternion.identity;
+            model.transform.localScale = Vector3.one;
+        }
     }
 
     public void UnEquip()
@@ -33,6 +42,8 @@ public abstract class Items : ScriptableObject
         PlayerManager.instance.damage -= damage;
         PlayerManager.instance.health -= health;
         PlayerManager.instance.equipment[(int)gearType] = null;
+        if (model != null)
+            Destroy(model);
     }
     public void Print()
     {

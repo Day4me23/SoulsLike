@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     public int health = 0;
     public int damage = 0;
     public int stamina = 0;
-
+    public Transform weaponEquipPoint;
 
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
