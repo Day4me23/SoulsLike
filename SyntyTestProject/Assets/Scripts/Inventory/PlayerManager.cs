@@ -19,15 +19,20 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Items itemToRemove;
     private GameObject[] slots;
     public Items[] equipment;
-    public int health = 0;
+    public int currentHealth = 100;
+    public int maxHealth = 100;
     public int damage = 0;
     public int stamina = 0;
+
     public Transform weaponEquipPoint;
+    public HealthBar healthBar;
 
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
-        
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
         int numOfSlots = System.Enum.GetNames(typeof(GearType)).Length;
         equipment = new Items[numOfSlots];
         slots = new GameObject[slotHolder.transform.childCount];
@@ -58,7 +63,7 @@ public class PlayerManager : MonoBehaviour
     }
     public bool Add(Items item)
     {
-        if (items.Count < slots.Length)
+        if (items.Count < slots.Length) 
         {
             items.Add(item);
         }
@@ -120,11 +125,11 @@ public class PlayerManager : MonoBehaviour
         displayItem = items[slotNum];
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
+    public void TakeDamage(int damage) {
+        currentHealth -= damage;
+        healthBar.SetCurrentHealth(currentHealth);
 
-        if (health <= 0) Invoke(nameof(DestroyPlayer), 0.5f);
+        if (currentHealth <= 0) Invoke(nameof(DestroyPlayer), 0.5f);
     }
 
     public void DestroyPlayer()

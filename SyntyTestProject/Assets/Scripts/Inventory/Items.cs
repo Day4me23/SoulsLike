@@ -21,7 +21,7 @@ public abstract class Items : ScriptableObject
     public void Equip()
     {
         isEquipped = true;
-        PlayerManager.instance.health += health;
+        PlayerManager.instance.currentHealth += health;
         PlayerManager.instance.damage += damage;
         Debug.Log(health + " " + damage);
         PlayerManager.instance.equipment[(int)gearType] = this;
@@ -40,7 +40,7 @@ public abstract class Items : ScriptableObject
     {
         isEquipped = false;
         PlayerManager.instance.damage -= damage;
-        PlayerManager.instance.health -= health;
+        PlayerManager.instance.currentHealth -= health;
         PlayerManager.instance.equipment[(int)gearType] = null;
         if (model != null)
             Destroy(model);

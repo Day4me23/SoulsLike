@@ -68,10 +68,12 @@ public class InputHandler : MonoBehaviour
         mouseY = cameraInput.y;
     }
     private void AttackInput(float delta) {
-        if (la_Input) {
-            playerAttack.HandleLightAttack();
-        } else if (ha_Input) {
-            playerAttack.HandleHeavyAttack();
-        }
+        if (!PlayerStateManager.instance.isInteracting) {
+            if (la_Input) {
+                playerAttack.HandleLightAttack();
+            } else if (ha_Input) {
+                playerAttack.HandleHeavyAttack();
+            }
+        }        
     }
 }
