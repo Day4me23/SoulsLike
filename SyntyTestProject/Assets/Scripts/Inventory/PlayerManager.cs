@@ -20,13 +20,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Items itemToRemove;
     private GameObject[] slots;
     public Items[] equipment;
-    public int currentHealth = 100;
-    public int maxHealth = 100;
-    public int damage = 0;
-    public int stamina = 0;
+    public float currentHealth = 100;
+    public float maxHealth = 100;
+    public float damage = 0;
+    public float currentStamina = 100;
+    public float maxStamina = 100;
 
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
+    public StaminaBar staminaBar;
     public GameObject deathScreen;
     bool dead = false;
 
@@ -35,6 +37,8 @@ public class PlayerManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        currentStamina = maxStamina;
+        staminaBar.SetMaxStamina(maxStamina);
 
         int numOfSlots = System.Enum.GetNames(typeof(GearType)).Length;
         equipment = new Items[numOfSlots];
@@ -107,9 +111,25 @@ public class PlayerManager : MonoBehaviour
     public Text descriptionText;
     public Text itemInfoText;
     public Image itemImage;
+    private float staminaRegenRate = 45f;
+    private float staminaSprintRate = 25f;
+    private float staminaRegenTimer = 0f;
 
-    void Update()
+    private void Update()
     {
+        if (currentStamina >= maxStamina || PlayerStateManager.instance.isInteracting || PlayerStateManager.instance.isSprinting)
+            staminaRegenTimer = 1f;            
+        staminaRegenTimer -= Time.deltaTime;
+        if (staminaRegenTimer <= 0f) {
+            currentStamina += staminaRegenRate * Time.deltaTime;
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
+            staminaBar.SetCurrentStamina(currentStamina);
+        }
+        if (PlayerStateManager.instance.isSprinting) {
+            UseStamina(staminaSprintRate * Time.deltaTime);
+        }
+
         if (displayItem == null)
             return;
 
@@ -136,6 +156,13 @@ public class PlayerManager : MonoBehaviour
             dead = true;
             StartCoroutine(OnDeath());
         }            
+    }
+    public void UseStamina(float stamina) {
+        currentStamina -= stamina;
+        if (currentStamina < 0f)
+            currentStamina = 0;
+        staminaBar.SetCurrentStamina(currentStamina);
+        
     }
     IEnumerator OnDeath() {        
         //Play Death Animation

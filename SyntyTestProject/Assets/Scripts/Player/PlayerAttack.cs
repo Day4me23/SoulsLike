@@ -10,8 +10,10 @@ public class PlayerAttack : MonoBehaviour
     }
     public void HandleLightAttack() {
         animatorHandler.PlayTargetAnimation("lightAttack", true);
+        PlayerManager.instance.UseStamina(10);
     }
     public void HandleHeavyAttack() {
         animatorHandler.PlayTargetAnimation("heavyAttack", true);
+        PlayerManager.instance.UseStamina(20);
     }
 }

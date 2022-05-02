@@ -72,10 +72,11 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection.y = 0;
 
         float speed = movementSpeed;
-        if (inputHandler.sprintFlag && inputHandler.moveAmount > .5f) {
+        if (inputHandler.sprintFlag && inputHandler.moveAmount > .5f && PlayerManager.instance.currentStamina > 1f) {
             speed = sprintSpeed;
             playerStateManager.isSprinting = true;
         } else {
+            inputHandler.sprintFlag = false;
             playerStateManager.isSprinting = false;
         }
         moveDirection *= speed;
@@ -93,8 +94,9 @@ public class PlayerLocomotion : MonoBehaviour
         if (inputHandler.rollFlag) {
             moveDirection = cameraObject.forward * inputHandler.vertical;
             moveDirection += cameraObject.right * inputHandler.horizontal;
-            if(inputHandler.moveAmount > 0) {
+            if(inputHandler.moveAmount > 0 && PlayerManager.instance.currentStamina > 1f) {
                 animatorHandler.PlayTargetAnimation("Rolling", true);
+                PlayerManager.instance.UseStamina(30f);
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
                 myTransform.eulerAngles = new Vector3(0f, myTransform.eulerAngles.y, myTransform.eulerAngles.z);
