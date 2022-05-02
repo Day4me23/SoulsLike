@@ -48,6 +48,11 @@ public class InputHandler : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                 else
                     Cursor.lockState = CursorLockMode.Locked;
+                if(Time.timeScale == 0f) {
+                    Time.timeScale = 1f;                
+                } else {
+                    Time.timeScale = 0f;
+                }
             };
 
         }

@@ -71,7 +71,7 @@ public class AnimatorHandler : MonoBehaviour
         canRotate = false;
     }
     private void OnAnimatorMove() {
-        if (!playerStateManager.isInteracting)
+        if (!playerStateManager.isInteracting || Time.deltaTime == 0f)
             return;
         float delta = Time.deltaTime;
         locomotion.rigidbody.drag = 0;

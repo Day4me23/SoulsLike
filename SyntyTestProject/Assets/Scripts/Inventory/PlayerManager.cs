@@ -139,6 +139,8 @@ public class PlayerManager : MonoBehaviour
     }
     IEnumerator OnDeath() {        
         //Play Death Animation
+        //Prevent input
+        //play noise (through animator?)
         CanvasGroup cg = deathScreen.GetComponent<CanvasGroup>();
         cg.alpha = 0f;
         yield return new WaitForSeconds(2f);
