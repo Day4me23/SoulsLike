@@ -6,7 +6,9 @@ public class ItemObject : MonoBehaviour
 {
     public Items item;
     public PlayerManager playerManager;
-
+    private void Start() {
+        playerManager = PlayerManager.instance;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6)
