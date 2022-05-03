@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,19 +20,25 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Items itemToRemove;
     private GameObject[] slots;
     public Items[] equipment;
-    public int currentHealth = 100;
-    public int maxHealth = 100;
-    public int damage = 0;
-    public int stamina = 0;
+    public float currentHealth = 100;
+    public float maxHealth = 100;
+    public float damage = 0;
+    public float currentStamina = 100;
+    public float maxStamina = 100;
 
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
+    public StaminaBar staminaBar;
+    public GameObject deathScreen;
+    bool dead = false;
 
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        currentStamina = maxStamina;
+        staminaBar.SetMaxStamina(maxStamina);
 
         int numOfSlots = System.Enum.GetNames(typeof(GearType)).Length;
         equipment = new Items[numOfSlots];
@@ -104,9 +111,25 @@ public class PlayerManager : MonoBehaviour
     public Text descriptionText;
     public Text itemInfoText;
     public Image itemImage;
+    private float staminaRegenRate = 45f;
+    private float staminaSprintRate = 25f;
+    private float staminaRegenTimer = 0f;
 
-    void Update()
+    private void Update()
     {
+        if (currentStamina >= maxStamina || PlayerStateManager.instance.isInteracting || PlayerStateManager.instance.isSprinting)
+            staminaRegenTimer = 1f;            
+        staminaRegenTimer -= Time.deltaTime;
+        if (staminaRegenTimer <= 0f) {
+            currentStamina += staminaRegenRate * Time.deltaTime;
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
+            staminaBar.SetCurrentStamina(currentStamina);
+        }
+        if (PlayerStateManager.instance.isSprinting) {
+            UseStamina(staminaSprintRate * Time.deltaTime);
+        }
+
         if (displayItem == null)
             return;
 
@@ -128,14 +151,34 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int damage) {
         currentHealth -= damage;
         healthBar.SetCurrentHealth(currentHealth);
-
-        if (currentHealth <= 0) Invoke(nameof(DestroyPlayer), 0.5f);
+        
+        if (currentHealth <= 0 && !dead) {
+            dead = true;
+            StartCoroutine(OnDeath());
+        }            
     }
-
-    public void DestroyPlayer()
-    {
-        Debug.Log("Player Dead");
+    public void UseStamina(float stamina) {
+        currentStamina -= stamina;
+        if (currentStamina < 0f)
+            currentStamina = 0;
+        staminaBar.SetCurrentStamina(currentStamina);
+        
     }
-
+    IEnumerator OnDeath() {        
+        //Play Death Animation
+        //Prevent input
+        //play noise (through animator?)
+        CanvasGroup cg = deathScreen.GetComponent<CanvasGroup>();
+        cg.alpha = 0f;
+        yield return new WaitForSeconds(2f);
+        deathScreen.SetActive(true);
+        float elapsedTime = 0f;
+        while(elapsedTime < 2f) {
+            elapsedTime += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(0, 1, elapsedTime);
+            yield return null;
+        }
+        SceneManager.LoadScene(0);
+    }
 
 }

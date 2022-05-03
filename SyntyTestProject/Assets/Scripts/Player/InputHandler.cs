@@ -48,6 +48,11 @@ public class InputHandler : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                 else
                     Cursor.lockState = CursorLockMode.Locked;
+                if(Time.timeScale == 0f) {
+                    Time.timeScale = 1f;                
+                } else {
+                    Time.timeScale = 0f;
+                }
             };
 
         }
@@ -68,7 +73,7 @@ public class InputHandler : MonoBehaviour
         mouseY = cameraInput.y;
     }
     private void AttackInput(float delta) {
-        if (!PlayerStateManager.instance.isInteracting) {
+        if (!PlayerStateManager.instance.isInteracting && PlayerManager.instance.currentStamina > 1f) {
             if (la_Input) {
                 playerAttack.HandleLightAttack();
             } else if (ha_Input) {

@@ -25,16 +25,16 @@ public class PlayerStateManager : MonoBehaviour
     }
     private void Update() {
         float delta = Time.deltaTime;
-
-        isInteracting = anim.GetBool("isInteracting");        
-        
-        if (cameraHandler != null)
-            cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
-        locomotion.HandleFalling(delta, locomotion.moveDirection);
-        inputHandler.TickInput(delta);
-        locomotion.HandleMovement(delta);
-        locomotion.HandleRollingAndSprinting(delta);
-        locomotion.HandleEstus();
+        if (Time.timeScale == 1f && delta != 0f) {
+            isInteracting = anim.GetBool("isInteracting");
+            if (cameraHandler != null)
+                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+            locomotion.HandleFalling(delta, locomotion.moveDirection);
+            inputHandler.TickInput(delta);
+            locomotion.HandleMovement(delta);
+            locomotion.HandleRollingAndSprinting(delta);
+            locomotion.HandleEstus();
+        }        
     }
     private void FixedUpdate() {
         float delta = Time.fixedDeltaTime;
