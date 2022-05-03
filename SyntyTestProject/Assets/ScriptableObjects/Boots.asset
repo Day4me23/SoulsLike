@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   itemName: Old Boots
-  itemIcon: {fileID: 21300000, guid: dd4c354c8a170e94581c1c7bec1516f1, type: 3}
+  itemIcon: {fileID: 21300000, guid: e741154f2413bab4aa682ca11df46071, type: 3}
   itemDescription: A worn pair of old boots
   damage: 0
   health: 10
