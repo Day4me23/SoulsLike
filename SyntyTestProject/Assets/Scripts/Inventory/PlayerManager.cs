@@ -32,9 +32,12 @@ public class PlayerManager : MonoBehaviour
     public GameObject deathScreen;
     bool dead = false;
 
+    AnimatorHandler animatorHandler;
+
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
+        animatorHandler = GetComponentInChildren<AnimatorHandler>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         currentStamina = maxStamina;
@@ -112,13 +115,13 @@ public class PlayerManager : MonoBehaviour
     public Text itemInfoText;
     public Image itemImage;
     private float staminaRegenRate = 45f;
-    private float staminaSprintRate = 25f;
+    private float staminaSprintRate = 11f;
     private float staminaRegenTimer = 0f;
 
     private void Update()
     {
         if (currentStamina >= maxStamina || PlayerStateManager.instance.isInteracting || PlayerStateManager.instance.isSprinting)
-            staminaRegenTimer = 1f;            
+            staminaRegenTimer = .6f;            
         staminaRegenTimer -= Time.deltaTime;
         if (staminaRegenTimer <= 0f) {
             currentStamina += staminaRegenRate * Time.deltaTime;
@@ -149,13 +152,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
-        currentHealth -= damage;
-        healthBar.SetCurrentHealth(currentHealth);
-        
-        if (currentHealth <= 0 && !dead) {
-            dead = true;
-            StartCoroutine(OnDeath());
-        }            
+        if (!dead) {
+            if (currentHealth <= 0) {
+                animatorHandler.PlayTargetAnimation("Death", true);
+                dead = true;
+                StartCoroutine(OnDeath());
+            } else {
+                currentHealth -= damage;
+                healthBar.SetCurrentHealth(currentHealth);
+                animatorHandler.PlayTargetAnimation("Impact", true);
+            }
+        }        
     }
     public void UseStamina(float stamina) {
         currentStamina -= stamina;
