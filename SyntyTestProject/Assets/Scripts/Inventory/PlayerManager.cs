@@ -29,20 +29,33 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Text Text_damage;
 
 
+    public PlayerWeapon weapon;
+    public List<GameObject> Chests;
+    public GameObject Chest;
+    public List<GameObject> Helmets;
+    public GameObject Helmet;
+    public List<GameObject> Legs;
+    public GameObject Leg;
+
+    public GameObject pickupPrompt;
+    public ItemObject latestObject;
+
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
     public StaminaBar staminaBar;
     public GameObject deathScreen;
-    bool dead = false;
+    public bool dead = false;
+
+    public int estusFlasks = 4;
 
     AnimatorHandler animatorHandler;
 
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+        animatorHandler = GetComponent<AnimatorHandler>();
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth, currentHealth);
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
 
@@ -76,14 +89,10 @@ public class PlayerManager : MonoBehaviour
     }
     public bool Add(Items item)
     {
-        if (items.Count < slots.Length) 
-        {
+        if (items.Count < slots.Length)
             items.Add(item);
-        }
         else
-        {
             return false;
-        }
         RefreshUI();
         return true;
     }
@@ -161,16 +170,26 @@ public class PlayerManager : MonoBehaviour
     {
         displayItem = items[slotNum];
     }
+    public void SetHealth(int add) {
+        if(add != 0) {
+            int oldmax = (int)maxHealth;
+            maxHealth += add;
+            currentHealth += add;
+            healthBar.SetMaxHealth(maxHealth, oldmax);
+        }
+        
+    }
 
     public void TakeDamage(int damage) {
         if (!dead) {
             if (currentHealth <= 0) {
                 animatorHandler.PlayTargetAnimation("Death", true);
                 dead = true;
+                GetComponentInParent<CapsuleCollider>().enabled = false;
                 StartCoroutine(OnDeath());
             } else {
                 currentHealth -= damage;
-                healthBar.SetCurrentHealth(currentHealth);
+                healthBar.SetCurrentHealth(currentHealth);                
                 animatorHandler.PlayTargetAnimation("Impact", true);
             }
         }        
@@ -181,6 +200,15 @@ public class PlayerManager : MonoBehaviour
             currentStamina = 0;
         staminaBar.SetCurrentStamina(currentStamina);
         
+    }
+    public void LoadWeaponDamageCollider() {
+        weapon = weaponEquipPoint.gameObject.GetComponentInChildren<PlayerWeapon>();
+    }
+    public void OpenDamageCollider() {
+        weapon.EnableDamageCollider();
+    }
+    public void CloseDamageCollider() {
+        weapon.DisableDamageCollider();
     }
     IEnumerator OnDeath() {        
         //Play Death Animation

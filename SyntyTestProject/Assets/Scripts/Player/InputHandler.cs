@@ -54,6 +54,16 @@ public class InputHandler : MonoBehaviour
                     Time.timeScale = 0f;
                 }
             };
+            inputActions.PlayerActions.Interact.performed += ctx => {
+                ItemObject io = PlayerManager.instance.latestObject;
+                if (io != null) {
+                    io.item.isEquipped = false;
+                    PlayerManager.instance.Add(io.item);
+                    Destroy(io.gameObject);
+                    PlayerManager.instance.latestObject = null;
+                    PlayerManager.instance.pickupPrompt.SetActive(false);
+                }                
+            };
 
         }
         inputActions.Enable();
@@ -73,7 +83,7 @@ public class InputHandler : MonoBehaviour
         mouseY = cameraInput.y;
     }
     private void AttackInput(float delta) {
-        if (!PlayerStateManager.instance.isInteracting && PlayerManager.instance.currentStamina > 1f) {
+        if (!PlayerStateManager.instance.isInteracting && PlayerManager.instance.currentStamina > 1f && PlayerManager.instance.weapon != null) {
             if (la_Input) {
                 playerAttack.HandleLightAttack();
             } else if (ha_Input) {

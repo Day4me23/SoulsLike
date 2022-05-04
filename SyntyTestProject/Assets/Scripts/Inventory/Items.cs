@@ -21,21 +21,46 @@ public abstract class Items : ScriptableObject
     public void Equip()
     {
         isEquipped = true;
-        PlayerManager.instance.currentHealth += health;
+        PlayerManager.instance.SetHealth(health);
         PlayerManager.instance.damage += damage;
         Debug.Log(health + " " + damage);
         PlayerManager.instance.equipment[(int)gearType] = this;
         if(this is Weapons w){
-            model = Instantiate(w.prefab);
-            if (model != null) {
-                model.transform.parent = PlayerManager.instance.weaponEquipPoint;
+            UnloadWeaponAndDestroy();
+            if(w.prefab == null) {
+                UnloadWeapon();
+                return;
             }
-            //model.transform.localPosition = Vector3.zero;
-            //model.transform.localRotation = Quaternion.identity;
-            //model.transform.localScale = Vector3.one;
+            model = Instantiate(w.prefab);
+            if (model != null)
+                model.transform.parent = PlayerManager.instance.weaponEquipPoint;
+            model.GetComponentInChildren<PlayerWeapon>().currentWeaponDamage = w.damage;
+            model.transform.localPosition = Vector3.zero;
+            model.transform.localRotation = Quaternion.identity;
+            model.transform.localScale = Vector3.one;
+            PlayerManager.instance.LoadWeaponDamageCollider();
+        }
+        if (this is Gear g) {
+            if (g.gearType == GearType.chest) {
+                PlayerManager.instance.Chest.SetActive(false);
+                PlayerManager.instance.Chest = PlayerManager.instance.Chests[g.gearId];
+                PlayerManager.instance.Chest.SetActive(true);
+            }
+            if(g.gearType == GearType.legs) {
+                PlayerManager.instance.Leg.SetActive(false);
+                PlayerManager.instance.Leg = PlayerManager.instance.Legs[g.gearId];
+                PlayerManager.instance.Leg.SetActive(true);
+            }
         }
     }
-
+    public void UnloadWeapon() {
+        if(model != null)
+            model.SetActive(false);
+    }
+    public void UnloadWeaponAndDestroy() {
+        if(model != null)
+            Destroy(model);
+    }
     public void UnEquip()
     {
         isEquipped = false;

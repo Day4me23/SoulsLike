@@ -13,9 +13,19 @@ public class ItemObject : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            item.isEquipped = false;
-            playerManager.Add(item);
-            Destroy(this.gameObject);
+            playerManager.pickupPrompt.SetActive(true);
+            playerManager.latestObject = this;            
+        }
+    }
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.layer == 6)
+            if(!playerManager.pickupPrompt.activeInHierarchy)
+                playerManager.pickupPrompt.SetActive(true);
+    }
+    private void OnTriggerExit(Collider other) {
+        if(other.gameObject.layer == 6) {
+            playerManager.pickupPrompt.SetActive(false);
+            playerManager.latestObject = null;
         }
     }
 }
