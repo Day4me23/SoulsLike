@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Interact to Pick Up Item
+  m_text: Press "E" to Pick Up Item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8cbb9933abe49b42a24ba8dc70ad143, type: 2}
   m_sharedMaterial: {fileID: 5996357459943155807, guid: d8cbb9933abe49b42a24ba8dc70ad143, type: 2}
@@ -46935,7 +46935,7 @@ MonoBehaviour:
   groundDistanceRayDistance: 0.05
   ignoreForGroundCheck:
     serializedVersion: 2
-    m_Bits: 2032
+    m_Bits: 15
   inAirTimer: 0
   movementSpeed: 5
   rotationSpeed: 10
@@ -46956,7 +46956,7 @@ MonoBehaviour:
   isInteracting: 0
   isSprinting: 0
   isInAir: 0
-  isGrounded: 0
+  isGrounded: 1
 --- !u!114 &2206385608295797592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67487,6 +67487,7 @@ MonoBehaviour:
   staminaBar: {fileID: 1860663863}
   deathScreen: {fileID: 6507837288108148240}
   dead: 0
+  estusFlasks: 4
   displayItem: {fileID: 0}
   nameText: {fileID: 7697692171450563248}
   descriptionText: {fileID: 1401365116105565858}
@@ -79499,7 +79500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8cbb9933abe49b42a24ba8dc70ad143, type: 2}
   m_sharedMaterial: {fileID: 5996357459943155807, guid: d8cbb9933abe49b42a24ba8dc70ad143, type: 2}
