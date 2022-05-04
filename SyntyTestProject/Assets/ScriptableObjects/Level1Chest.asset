@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1Chest
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  itemName: 
-  itemIcon: {fileID: 0}
+  itemName: Level 1 Chestplate
+  itemIcon: {fileID: 21300000, guid: cd620ed8ce5f4bb4daa0dd25d9249978, type: 3}
   itemDescription: 
   damage: 0
-  health: 0
+  health: 50
   gearType: 1
   isEquipped: 0

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level2Weapon
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
-  damage: 0
+  itemName: Level 2 Sword
+  itemIcon: {fileID: 21300000, guid: b90ac84b5c67e0c4f99b05ee16b1caa6, type: 3}
+  itemDescription: It will cut limbs somewhat cleanly
+  damage: 50
   health: 0
   gearType: 5
   isEquipped: 0
