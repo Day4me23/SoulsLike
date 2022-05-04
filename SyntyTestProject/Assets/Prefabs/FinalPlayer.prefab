@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2030291040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67477,6 +67477,8 @@ MonoBehaviour:
   - {fileID: 6972514053874605224}
   - {fileID: 1388639486900551822}
   Leg: {fileID: 6972514053874605224}
+  pickupPrompt: {fileID: 2030291039}
+  latestObject: {fileID: 0}
   weaponEquipPoint: {fileID: 2206385607080180862}
   healthBar: {fileID: 5305568722369916986}
   staminaBar: {fileID: 1860663863}

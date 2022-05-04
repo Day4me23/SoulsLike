@@ -16765,6 +16765,7 @@ GameObject:
   - component: {fileID: 9192723609461532042}
   - component: {fileID: 7333630342120755639}
   - component: {fileID: 5845408921424739138}
+  - component: {fileID: 9163058932301570988}
   m_Layer: 0
   m_Name: ModularCharacters
   m_TagString: Untagged
@@ -16925,6 +16926,19 @@ MonoBehaviour:
   heavyatk: {fileID: 8300000, guid: 970b689ac5409654699a67ac689b7d74, type: 3}
   land: {fileID: 8300000, guid: 8ac9e00a22d548447ba2b246c5054353, type: 3}
   heal: {fileID: 8300000, guid: cc825449d2511e449aebd5229ff3aab2, type: 3}
+--- !u!114 &9163058932301570988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155464175631874664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073e66be016ce0c4fb89c5bad0d1b141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 9192723609461532042}
 --- !u!1 &2161457266030907972
 GameObject:
   m_ObjectHideFlags: 0

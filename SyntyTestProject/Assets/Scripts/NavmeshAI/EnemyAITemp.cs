@@ -5,6 +5,7 @@ public class EnemyAITemp : MonoBehaviour
 {
     public NavMeshAgent agent;
     public PlayerManager playerStats;
+    EnemyAnimatorManager enemyAnimatorManager;
 
     public Transform player;
 
@@ -29,6 +30,7 @@ public class EnemyAITemp : MonoBehaviour
 
     private void Awake()
     {
+        enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -38,7 +40,7 @@ public class EnemyAITemp : MonoBehaviour
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
+        enemyAnimatorManager.anim.SetFloat("Vertical", 1f, 0.1f, Time.deltaTime);
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
@@ -78,6 +80,7 @@ public class EnemyAITemp : MonoBehaviour
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
+        enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
 
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
@@ -109,8 +112,7 @@ public class EnemyAITemp : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
-    }
-
+    }        
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
