@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac46d2a12ce3254e8c107bfa87513af, type: 3}
   m_Name: Level1Sword
   m_EditorClassIdentifier: 
-  itemName: Sword
-  itemIcon: {fileID: 21300000, guid: 009d4fc67f3ecc341a5229c548eea9a0, type: 3}
-  itemDescription: Shiny Sword
-  damage: 20
+  prefab: {fileID: 0}
+  itemName: Level 1 Sword
+  itemIcon: {fileID: 21300000, guid: 7123ab2564cf05841a45af196f40e402, type: 3}
+  itemDescription: 'Its a weapon. '
+  damage: 25
   health: 0
   gearType: 5
   isEquipped: 0

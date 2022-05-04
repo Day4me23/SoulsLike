@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level3Weapon
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
-  damage: 0
+  itemName: Level 3 Sword
+  itemIcon: {fileID: 21300000, guid: 616913dff457ebf499873ada41f10eb5, type: 3}
+  itemDescription: This thing does some serious damage
+  damage: 75
   health: 0
   gearType: 5
   isEquipped: 0
