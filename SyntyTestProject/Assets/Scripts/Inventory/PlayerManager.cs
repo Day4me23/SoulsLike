@@ -34,6 +34,9 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> Legs;
     public GameObject Leg;
 
+    public GameObject pickupPrompt;
+    public ItemObject latestObject;
+
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
     public StaminaBar staminaBar;
@@ -81,14 +84,10 @@ public class PlayerManager : MonoBehaviour
     }
     public bool Add(Items item)
     {
-        if (items.Count < slots.Length) 
-        {
+        if (items.Count < slots.Length)
             items.Add(item);
-        }
         else
-        {
             return false;
-        }
         RefreshUI();
         return true;
     }
@@ -162,6 +161,7 @@ public class PlayerManager : MonoBehaviour
         if(add != 0) {
             int oldmax = (int)maxHealth;
             maxHealth += add;
+            currentHealth += add;
             healthBar.SetMaxHealth(maxHealth, oldmax);
         }
         

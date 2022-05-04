@@ -54,6 +54,16 @@ public class InputHandler : MonoBehaviour
                     Time.timeScale = 0f;
                 }
             };
+            inputActions.PlayerActions.Interact.performed += ctx => {
+                ItemObject io = PlayerManager.instance.latestObject;
+                if (io != null) {
+                    io.item.isEquipped = false;
+                    PlayerManager.instance.Add(io.item);
+                    Destroy(io.gameObject);
+                    PlayerManager.instance.latestObject = null;
+                    PlayerManager.instance.pickupPrompt.SetActive(false);
+                }                
+            };
 
         }
         inputActions.Enable();
