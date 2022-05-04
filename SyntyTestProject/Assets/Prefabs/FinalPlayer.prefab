@@ -46870,9 +46870,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 1.5
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1.05, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &2206385608295797543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46933,6 +46933,9 @@ MonoBehaviour:
   groundDetectionRayStartPoint: 0.5
   minimumDistanceNeededToBeginFall: 1
   groundDistanceRayDistance: 0.05
+  ignoreForGroundCheck:
+    serializedVersion: 2
+    m_Bits: 2032
   inAirTimer: 0
   movementSpeed: 5
   rotationSpeed: 10
@@ -67483,6 +67486,7 @@ MonoBehaviour:
   healthBar: {fileID: 5305568722369916986}
   staminaBar: {fileID: 1860663863}
   deathScreen: {fileID: 6507837288108148240}
+  dead: 0
   displayItem: {fileID: 0}
   nameText: {fileID: 7697692171450563248}
   descriptionText: {fileID: 1401365116105565858}

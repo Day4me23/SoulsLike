@@ -19,7 +19,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] float groundDetectionRayStartPoint = 0.5f;
     [SerializeField] float minimumDistanceNeededToBeginFall = 1f;
     [SerializeField] float groundDistanceRayDistance = 0.2f;
-    LayerMask ignoreForGroundCheck;
+    [SerializeField] LayerMask ignoreForGroundCheck;
     public float inAirTimer;
 
     [Header("Movement Stats")]
@@ -30,7 +30,6 @@ public class PlayerLocomotion : MonoBehaviour
     private void Start() {
         playerStateManager = GetComponent<PlayerStateManager>();
         playerStateManager.isGrounded = true;
-        ignoreForGroundCheck = ~(1 << 6); //NOT 6
         
         rigidbody = GetComponent<Rigidbody>();
 
@@ -100,9 +99,7 @@ public class PlayerLocomotion : MonoBehaviour
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
                 myTransform.eulerAngles = new Vector3(0f, myTransform.eulerAngles.y, myTransform.eulerAngles.z);
-            } /*else { //BACKSTEP FUNC. REMOVED ATM
-                animatorHandler.PlayTargetAnimation("Backstep", true);
-            }*/
+            }
         }
     }
     public void HandleFalling(float delta, Vector3 moveDirection) {
@@ -111,8 +108,8 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 origin = myTransform.position;
         origin.y += groundDetectionRayStartPoint;
 
-        if(Physics.Raycast(origin, myTransform.forward, out hit, 0.4f)) //Don't move into something in front of you
-            moveDirection = Vector3.zero;
+        //if(Physics.Raycast(origin, myTransform.forward, out hit, 0.4f)) //Don't move into something in front of you
+        //    moveDirection = Vector3.zero;
         if (playerStateManager.isInAir) {
             rigidbody.AddForce(Vector3.down * fallingSpeed);
             if(inAirTimer < 0.3f)
