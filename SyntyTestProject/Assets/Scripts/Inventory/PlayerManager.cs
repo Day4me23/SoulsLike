@@ -128,7 +128,7 @@ public class PlayerManager : MonoBehaviour
     public Image itemImage;
     private float staminaRegenRate = 45f;
     private float staminaSprintRate = 11f;
-    private float staminaRegenTimer = 0f;
+    private float staminaRegenTimer = .6f;
 
     private void Update()
     {
@@ -183,6 +183,8 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int damage) {
         if (!dead) {
             if (currentHealth <= 0) {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 animatorHandler.PlayTargetAnimation("Death", true);
                 dead = true;
                 GetComponentInParent<CapsuleCollider>().enabled = false;
