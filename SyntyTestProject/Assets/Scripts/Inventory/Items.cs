@@ -28,11 +28,11 @@ public abstract class Items : ScriptableObject
         if(this is Weapons w){
             model = Instantiate(w.prefab);
             if (model != null) {
-                model.transform.parent = PlayerManager.instance.transform;
+                model.transform.parent = PlayerManager.instance.weaponEquipPoint;
             }
-            model.transform.localPosition = Vector3.zero;
-            model.transform.localRotation = Quaternion.identity;
-            model.transform.localScale = Vector3.one;
+            //model.transform.localPosition = Vector3.zero;
+            //model.transform.localRotation = Quaternion.identity;
+            //model.transform.localScale = Vector3.one;
         }
     }
 
