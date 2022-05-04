@@ -136,7 +136,7 @@ public class PlayerLocomotion : MonoBehaviour
                 if (inAirTimer > 0.5f)               
                     animatorHandler.PlayTargetAnimation("Land", true);
                 else //if falling time was short, dont't play animation
-                    animatorHandler.PlayTargetAnimation("Locomotion", false);
+                    animatorHandler.PlayTargetAnimation("Empty", false);
                 inAirTimer = 0;
                 playerStateManager.isInAir = false;
             }
@@ -153,12 +153,10 @@ public class PlayerLocomotion : MonoBehaviour
                 playerStateManager.isInAir = true;
             }
         }
-        if (playerStateManager.isGrounded) {
-            if (playerStateManager.isInteracting || inputHandler.moveAmount > 0)
-                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
-            else
-                myTransform.position = targetPosition;            
-        }
+        if (playerStateManager.isInteracting || inputHandler.moveAmount > 0)
+            myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+        else
+            myTransform.position = targetPosition;       
     }
     #endregion
 
