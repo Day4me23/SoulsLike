@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Item/Gear")]
 public class Gear : Items
 {
-    
-    
+    public int gearId;
     public override Items GetItem()
     {
         return this;

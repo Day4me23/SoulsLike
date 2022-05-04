@@ -40,6 +40,18 @@ public abstract class Items : ScriptableObject
             model.transform.localScale = Vector3.one;
             PlayerManager.instance.LoadWeaponDamageCollider();
         }
+        if (this is Gear g) {
+            if (g.gearType == GearType.chest) {
+                PlayerManager.instance.Chest.SetActive(false);
+                PlayerManager.instance.Chest = PlayerManager.instance.Chests[g.gearId];
+                PlayerManager.instance.Chest.SetActive(true);
+            }
+            if(g.gearType == GearType.legs) {
+                PlayerManager.instance.Leg.SetActive(false);
+                PlayerManager.instance.Leg = PlayerManager.instance.Legs[g.gearId];
+                PlayerManager.instance.Leg.SetActive(true);
+            }
+        }
     }
     public void UnloadWeapon() {
         if(model != null)

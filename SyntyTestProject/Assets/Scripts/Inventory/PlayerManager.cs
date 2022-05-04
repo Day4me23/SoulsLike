@@ -27,6 +27,12 @@ public class PlayerManager : MonoBehaviour
     public float maxStamina = 100;
 
     public PlayerWeapon weapon;
+    public List<GameObject> Chests;
+    public GameObject Chest;
+    public List<GameObject> Helmets;
+    public GameObject Helmet;
+    public List<GameObject> Legs;
+    public GameObject Leg;
 
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
