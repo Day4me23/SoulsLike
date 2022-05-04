@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     public float currentStamina = 100;
     public float maxStamina = 100;
 
+    public PlayerWeapon weapon;
+
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
     public StaminaBar staminaBar;
@@ -37,7 +39,7 @@ public class PlayerManager : MonoBehaviour
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+        animatorHandler = GetComponent<AnimatorHandler>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         currentStamina = maxStamina;
@@ -170,6 +172,15 @@ public class PlayerManager : MonoBehaviour
             currentStamina = 0;
         staminaBar.SetCurrentStamina(currentStamina);
         
+    }
+    public void LoadWeaponDamageCollider() {
+        weapon = weaponEquipPoint.gameObject.GetComponentInChildren<PlayerWeapon>();
+    }
+    public void OpenDamageCollider() {
+        weapon.EnableDamageCollider();
+    }
+    public void CloseDamageCollider() {
+        weapon.DisableDamageCollider();
     }
     IEnumerator OnDeath() {        
         //Play Death Animation

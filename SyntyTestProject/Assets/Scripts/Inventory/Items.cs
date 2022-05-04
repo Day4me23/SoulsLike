@@ -34,9 +34,11 @@ public abstract class Items : ScriptableObject
             model = Instantiate(w.prefab);
             if (model != null)
                 model.transform.parent = PlayerManager.instance.weaponEquipPoint;
+            model.GetComponentInChildren<PlayerWeapon>().currentWeaponDamage = w.damage;
             model.transform.localPosition = Vector3.zero;
             model.transform.localRotation = Quaternion.identity;
             model.transform.localScale = Vector3.one;
+            PlayerManager.instance.LoadWeaponDamageCollider();
         }
     }
     public void UnloadWeapon() {
