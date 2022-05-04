@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
     {
         animatorHandler = GetComponent<AnimatorHandler>();
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth, currentHealth);
         currentStamina = maxStamina;
         staminaBar.SetMaxStamina(maxStamina);
 
@@ -157,6 +157,14 @@ public class PlayerManager : MonoBehaviour
     public void AddDisplay(int slotNum)
     {
         displayItem = items[slotNum];
+    }
+    public void SetHealth(int add) {
+        if(add != 0) {
+            int oldmax = (int)maxHealth;
+            maxHealth += add;
+            healthBar.SetMaxHealth(maxHealth, oldmax);
+        }
+        
     }
 
     public void TakeDamage(int damage) {

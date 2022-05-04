@@ -21,7 +21,7 @@ public abstract class Items : ScriptableObject
     public void Equip()
     {
         isEquipped = true;
-        PlayerManager.instance.currentHealth += health;
+        PlayerManager.instance.SetHealth(health);
         PlayerManager.instance.damage += damage;
         Debug.Log(health + " " + damage);
         PlayerManager.instance.equipment[(int)gearType] = this;
