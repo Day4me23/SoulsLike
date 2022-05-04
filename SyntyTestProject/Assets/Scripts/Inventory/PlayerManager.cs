@@ -25,6 +25,9 @@ public class PlayerManager : MonoBehaviour
     public float damage = 0;
     public float currentStamina = 100;
     public float maxStamina = 100;
+    [SerializeField] Text Text_health;
+    [SerializeField] Text Text_damage;
+
 
     public Transform weaponEquipPoint;
     public HealthBar healthBar;
@@ -120,6 +123,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        Text_health.text =  "Current Health: " + currentHealth;
+        Text_damage.text = "Current Damage: " + damage;
+
         if (currentStamina >= maxStamina || PlayerStateManager.instance.isInteracting || PlayerStateManager.instance.isSprinting)
             staminaRegenTimer = .6f;            
         staminaRegenTimer -= Time.deltaTime;
@@ -134,8 +140,13 @@ public class PlayerManager : MonoBehaviour
         }
 
         if (displayItem == null)
+        {
+            itemImage.gameObject.SetActive(false);
+            nameText.text = "";
+            itemInfoText.text = "";
             return;
-
+        }
+        itemImage.gameObject.SetActive(true);
         displayItem.Print();
         itemImage.sprite = displayItem.itemIcon;
         nameText.text = "Name: " + displayItem.name;
