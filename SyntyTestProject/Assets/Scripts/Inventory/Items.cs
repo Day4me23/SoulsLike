@@ -26,16 +26,27 @@ public abstract class Items : ScriptableObject
         Debug.Log(health + " " + damage);
         PlayerManager.instance.equipment[(int)gearType] = this;
         if(this is Weapons w){
-            model = Instantiate(w.prefab);
-            if (model != null) {
-                model.transform.parent = PlayerManager.instance.weaponEquipPoint;
+            UnloadWeaponAndDestroy();
+            if(w.prefab == null) {
+                UnloadWeapon();
+                return;
             }
-            //model.transform.localPosition = Vector3.zero;
-            //model.transform.localRotation = Quaternion.identity;
-            //model.transform.localScale = Vector3.one;
+            model = Instantiate(w.prefab);
+            if (model != null)
+                model.transform.parent = PlayerManager.instance.weaponEquipPoint;
+            model.transform.localPosition = Vector3.zero;
+            model.transform.localRotation = Quaternion.identity;
+            model.transform.localScale = Vector3.one;
         }
     }
-
+    public void UnloadWeapon() {
+        if(model != null)
+            model.SetActive(false);
+    }
+    public void UnloadWeaponAndDestroy() {
+        if(model != null)
+            Destroy(model);
+    }
     public void UnEquip()
     {
         isEquipped = false;

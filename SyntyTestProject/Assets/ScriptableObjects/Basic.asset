@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac46d2a12ce3254e8c107bfa87513af, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5584410852648757094, guid: 975ff98b9cc6cac498ece4a2b6df26f2, type: 3}
+  prefab: {fileID: 3045928861091704345, guid: da61034348a029b4e8a030a3ff5f5c0d, type: 3}
   itemName: Basic Sword
   itemIcon: {fileID: 21300000, guid: da3489a989b315644b2918cb9df15709, type: 3}
   itemDescription: Basic Sword used for slicing cheese
   damage: 10
   health: 0
   gearType: 5
-  isEquipped: 0
+  isEquipped: 1
   weaponType: 0
