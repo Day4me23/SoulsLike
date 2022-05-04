@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1Cape
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  itemName: Standard Helmet
-  itemIcon: {fileID: 0}
-  itemDescription: 
+  itemName: Level 1 Cape
+  itemIcon: {fileID: 21300000, guid: 23b3f4064861b7b419105fab4a69018c, type: 3}
+  itemDescription: You look slightly more cool
   damage: 0
-  health: 0
+  health: 50
   gearType: 3
   isEquipped: 0

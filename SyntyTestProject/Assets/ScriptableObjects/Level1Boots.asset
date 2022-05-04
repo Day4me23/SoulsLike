@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1Boots
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
+  itemName: Level 1 Boots
+  itemIcon: {fileID: 21300000, guid: 0182b4ef5ee3afd4db53a5863aa32872, type: 3}
+  itemDescription: They'll keep your feet dry at least
   damage: 0
-  health: 0
+  health: 50
   gearType: 4
   isEquipped: 0
