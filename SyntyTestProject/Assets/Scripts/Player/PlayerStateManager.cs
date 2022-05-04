@@ -34,7 +34,7 @@ public class PlayerStateManager : MonoBehaviour
             locomotion.HandleMovement(delta);
             locomotion.HandleRollingAndSprinting(delta);
             locomotion.HandleEstus();
-        }        
+        }     
     }
     private void FixedUpdate() {
         float delta = Time.fixedDeltaTime;

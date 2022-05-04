@@ -8,6 +8,8 @@ public class PlayerWeapon : MonoBehaviour
     PlayerStateManager playerStateManager;
     Collider damageCollider;
     public int currentWeaponDamage = 25;
+    private List<EnemyAITemp> enemyAITempList = new List<EnemyAITemp>();
+    bool hasHitPlayer = false;
     private void Start() {
         playerManager = GetComponentInParent<PlayerManager>();
         playerStateManager = PlayerStateManager.instance;        
@@ -22,16 +24,23 @@ public class PlayerWeapon : MonoBehaviour
         damageCollider.enabled = true;
     }
     public void DisableDamageCollider() {
+        enemyAITempList.Clear();
         damageCollider.enabled = false;
+        hasHitPlayer = false;
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         PlayerManager playerStats = other.GetComponentInParent<PlayerManager>();
         EnemyAITemp enemyAITemp = other.GetComponentInParent<EnemyAITemp>();
-        if(playerStats != null)
-            if(playerStats.gameObject.layer == 7)
-                playerManager.TakeDamage(currentWeaponDamage);
-        else if(enemyAITemp != null)
-            if(enemyAITemp.gameObject.layer == 9)
+        if(playerStats != null) {
+            if (other.gameObject.layer == 7 && !hasHitPlayer) {
+                hasHitPlayer = true;
+                playerStats.TakeDamage(currentWeaponDamage);
+            }                
+        } else if(enemyAITemp != null) {
+            if (enemyAITemp.gameObject.layer == 9 && !enemyAITempList.Contains(enemyAITemp)) {
                 enemyAITemp.TakeDamage(currentWeaponDamage);
+                enemyAITempList.Add(enemyAITemp);
+            }                
+        }            
     }
 }

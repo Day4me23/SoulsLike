@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
     public HealthBar healthBar;
     public StaminaBar staminaBar;
     public GameObject deathScreen;
-    bool dead = false;
+    public bool dead = false;
 
     AnimatorHandler animatorHandler;
 
@@ -172,10 +172,11 @@ public class PlayerManager : MonoBehaviour
             if (currentHealth <= 0) {
                 animatorHandler.PlayTargetAnimation("Death", true);
                 dead = true;
+                GetComponentInParent<CapsuleCollider>().enabled = false;
                 StartCoroutine(OnDeath());
             } else {
                 currentHealth -= damage;
-                healthBar.SetCurrentHealth(currentHealth);
+                healthBar.SetCurrentHealth(currentHealth);                
                 animatorHandler.PlayTargetAnimation("Impact", true);
             }
         }        

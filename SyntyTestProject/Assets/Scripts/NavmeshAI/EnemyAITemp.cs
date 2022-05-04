@@ -6,12 +6,13 @@ public class EnemyAITemp : MonoBehaviour
     public NavMeshAgent agent;
     public PlayerManager playerStats;
     EnemyAnimatorManager enemyAnimatorManager;
-
+    
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float health;
+    bool dead = false;
     public int damage = 10;
 
     //Patroling
@@ -37,6 +38,8 @@ public class EnemyAITemp : MonoBehaviour
 
     private void Update()
     {
+        if (dead)
+            return;
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -56,11 +59,14 @@ public class EnemyAITemp : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
+        if (distanceToWalkPoint.magnitude < 1f) {
+            enemyAnimatorManager.anim.SetFloat("Vertical", 0f, 0.1f, Time.deltaTime);
             walkPointSet = false;
+        }           
     }
     private void SearchWalkPoint()
     {
+        enemyAnimatorManager.anim.SetFloat("Vertical", 0f, 0.1f, Time.deltaTime);
         //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
@@ -87,8 +93,7 @@ public class EnemyAITemp : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Debug.Log("Dealt Damage: " + damage);
-            PlayerManager.instance.TakeDamage(damage);
+            enemyAnimatorManager.PlayTargetAnimation("lightAttack", true);
             /*Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);*/
@@ -107,12 +112,15 @@ public class EnemyAITemp : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-    }
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }        
+        if (health <= 0) {
+            enemyAnimatorManager.PlayTargetAnimation("Death", true);
+            dead = true;
+            Destroy(this.gameObject, 10f);
+            GetComponent<CapsuleCollider>().enabled = false;
+            agent.enabled = false;
+        }
+        
+    }    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
