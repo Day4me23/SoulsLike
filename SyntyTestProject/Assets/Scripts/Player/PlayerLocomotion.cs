@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
@@ -159,7 +160,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleEstus() {
         if (inputHandler.estusFlag) {
-            if(!playerStateManager.isInteracting) {
+            if(!playerStateManager.isInteracting && PlayerManager.instance.estusFlasks > 0) {
+                PlayerManager.instance.estusFlasks -= 1;
+                PlayerManager.instance.TakeDamage(-66);
+                GameObject.Find("Consumable Count").GetComponent<TextMeshProUGUI>().text = PlayerManager.instance.estusFlasks.ToString();
                 animatorHandler.PlayTargetAnimation("Heal", true);
                //Increase health, decrease flasks
             }

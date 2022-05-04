@@ -43,6 +43,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject deathScreen;
     public bool dead = false;
 
+    public int estusFlasks = 4;
+
     AnimatorHandler animatorHandler;
 
     //This is where you would send itemToAdd and Remove... NOT IN START
