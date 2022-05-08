@@ -63,93 +63,49 @@ public class PlayerManager : MonoBehaviour
         equipment = new Items[numOfSlots];
         slots = new GameObject[slotHolder.transform.childCount];
         for (int i = 0; i < slotHolder.transform.childCount; i++)
-        {
             slots[i] = slotHolder.transform.GetChild(i).gameObject;
-        }
         RefreshUI();
         Add(itemToAdd);
         Remove(itemToRemove);
     }
-
-    public void RefreshUI()
+    private void Update() 
     {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            try
-            {
-                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemIcon;
-            }
-            catch
-            {
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
-                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
-            }
-        }
-    }
-    public bool Add(Items item)
-    {
-        if (items.Count < slots.Length)
-            items.Add(item);
-        else
-            return false;
-        RefreshUI();
-        return true;
-    }
-
-    public void Remove(Items item)
-    {
-        items.Remove(item);
-        RefreshUI();
-    }
-
-    public void DisplayItem(Items item)
-    {
-        Debug.Log("Displaying item information for - " + item);
-    }
-
-    public void Equip()
-    {
-        if (displayItem.isEquipped)
-            return;
-        if (equipment[(int)displayItem.gearType] != null)
-            equipment[(int)displayItem.gearType].UnEquip();
-        Debug.Log(displayItem);
-        displayItem.Equip();
-        //displayItem = null;
-        
-    }
-
-    [Header("Item Display")]
-    public Items displayItem;
-    public Text nameText;
-    public Text descriptionText;
-    public Text itemInfoText;
-    public Image itemImage;
-    private float staminaRegenRate = 45f;
-    private float staminaSprintRate = 11f;
-    private float staminaRegenTimer = .6f;
-
-    private void Update()
-    {
-        Text_health.text =  "Current Health: " + currentHealth;
-        Text_damage.text = "Current Damage: " + damage;
-
+        //if player has more stamina than possible, is interacting or sprinting, set regen timer to max, then subtract deltatime each frame
         if (currentStamina >= maxStamina || PlayerStateManager.instance.isInteracting || PlayerStateManager.instance.isSprinting)
-            staminaRegenTimer = .6f;            
+            staminaRegenTimer = .6f;
         staminaRegenTimer -= Time.deltaTime;
+
+        //if the stamina regen timer hits 0, start regening stamina, if it hits max stop, then actually set the bar each frame
         if (staminaRegenTimer <= 0f) {
             currentStamina += staminaRegenRate * Time.deltaTime;
             if (currentStamina > maxStamina)
                 currentStamina = maxStamina;
             staminaBar.SetCurrentStamina(currentStamina);
         }
-        if (PlayerStateManager.instance.isSprinting) {
-            UseStamina(staminaSprintRate * Time.deltaTime);
-        }
 
-        if (displayItem == null)
-        {
+        //if sprinting, use stamina
+        if (PlayerStateManager.instance.isSprinting)
+            UseStamina(staminaSprintRate * Time.deltaTime);
+    }
+    public void RefreshUI()
+    {
+        for (int i = 0; i < slots.Length; i++) {
+            try {
+                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemIcon;
+            } catch {
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+                slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+            }
+        }
+        UpdateUI();
+    }
+    private void UpdateUI() //Called when UI needs to update, such as when it gets refreshed, or on equip or display item
+    {
+        Text_health.text = "Current Health: " + currentHealth;
+        Text_damage.text = "Current Damage: " + damage;
+
+        if (displayItem == null) {
             itemImage.gameObject.SetActive(false);
             nameText.text = "";
             itemInfoText.text = "";
@@ -160,17 +116,59 @@ public class PlayerManager : MonoBehaviour
         itemImage.sprite = displayItem.itemIcon;
         nameText.text = "Name: " + displayItem.name;
         descriptionText.text = "Description: " + displayItem.itemDescription;
+
         if (displayItem.gearType == GearType.weapon)
             itemInfoText.text = "Damage: " + displayItem.damage;
         else
             itemInfoText.text = "Armour: " + displayItem.health;
     }
+    public bool Add(Items item)
+    {
+        if (items.Count < slots.Length) {
+            items.Add(item);
+            RefreshUI();
+            return true;
+        }
+            return false;        
+    }
+
+    public void Remove(Items item)
+    {
+        items.Remove(item);
+        RefreshUI();
+    }
+
+    public void Equip()
+    {
+        if (displayItem.isEquipped)
+            return;
+        if (equipment[(int)displayItem.gearType] != null)
+            equipment[(int)displayItem.gearType].UnEquip();
+        Debug.Log(displayItem);
+        displayItem.Equip();
+        UpdateUI();
+    }
+
+    [Header("Item Display")]
+    public Items displayItem;
+    public Text nameText;
+    public Text descriptionText;
+    public Text itemInfoText;
+    public Image itemImage;
+
+    private float staminaRegenRate = 45f;
+    private float staminaSprintRate = 11f;
+    private float staminaRegenTimer = .6f;
+
+    
 
     public void AddDisplay(int slotNum)
     {
         displayItem = items[slotNum];
+        UpdateUI();
     }
-    public void SetHealth(int add) {
+    public void SetHealth(int add) 
+    {
         if(add != 0) {
             int oldmax = (int)maxHealth;
             maxHealth += add;
@@ -180,20 +178,16 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage) {
-        if (!dead) {
-            if (currentHealth <= 0) {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                animatorHandler.PlayTargetAnimation("Death", true);
-                dead = true;
-                GetComponentInParent<CapsuleCollider>().enabled = false;
-                StartCoroutine(OnDeath());
-            } else {
+    public void TakeDamage(int damage) 
+    {
+        if (!dead) { //if not dead and health > 0, take damage, then check if dead
+            if (currentHealth > 0) {
                 currentHealth -= damage;
-                healthBar.SetCurrentHealth(currentHealth);                
+                healthBar.SetCurrentHealth(currentHealth);
                 animatorHandler.PlayTargetAnimation("Impact", true);
-            }
+            }                
+            if (currentHealth <= 0)
+                StartCoroutine(OnDeath());
         }        
     }
     public void UseStamina(float stamina) {
@@ -212,10 +206,13 @@ public class PlayerManager : MonoBehaviour
     public void CloseDamageCollider() {
         weapon.DisableDamageCollider();
     }
-    IEnumerator OnDeath() {        
-        //Play Death Animation
-        //Prevent input
+    IEnumerator OnDeath() {
         //play noise (through animator?)
+        GetComponentInParent<CapsuleCollider>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        animatorHandler.PlayTargetAnimation("Death", true);
+        dead = true;        
         CanvasGroup cg = deathScreen.GetComponent<CanvasGroup>();
         cg.alpha = 0f;
         yield return new WaitForSeconds(2f);
