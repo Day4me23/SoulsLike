@@ -181,13 +181,15 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         if (!dead) { //if not dead and health > 0, take damage, then check if dead
-            if (currentHealth > 0) {
+            if (currentHealth > 0)
                 currentHealth -= damage;
-                healthBar.SetCurrentHealth(currentHealth);
-                animatorHandler.PlayTargetAnimation("Impact", true);
-            }                
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
+            healthBar.SetCurrentHealth(currentHealth);
+            animatorHandler.PlayTargetAnimation("Impact", true);
             if (currentHealth <= 0)
                 StartCoroutine(OnDeath());
+            
         }        
     }
     public void UseStamina(float stamina) {
