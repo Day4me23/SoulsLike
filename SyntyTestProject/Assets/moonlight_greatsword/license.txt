@@ -1,0 +1,11 @@
+Model Information:
+* title:	Moonlight Greatsword
+* source:	https://sketchfab.com/3d-models/moonlight-greatsword-889534976ffd4a44b38406ec23e23258
+* author:	Wabbaboy (https://sketchfab.com/Wabbaboy)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Moonlight Greatsword" (https://sketchfab.com/3d-models/moonlight-greatsword-889534976ffd4a44b38406ec23e23258) by Wabbaboy (https://sketchfab.com/Wabbaboy) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

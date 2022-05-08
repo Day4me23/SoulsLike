@@ -44,11 +44,14 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.RightWeaponHeavyAttack.performed += ctx => ha_Input = true;
             inputActions.PlayerActions.Menu.performed += ctx => {
                 menu.SetActive(!menu.activeInHierarchy);
-                if(Cursor.lockState == CursorLockMode.Locked)
+                if(Cursor.lockState == CursorLockMode.Locked) {
                     Cursor.lockState = CursorLockMode.None;
-                else
+                    Cursor.visible = true;
+                } else {
                     Cursor.lockState = CursorLockMode.Locked;
-                if(Time.timeScale == 0f) {
+                    Cursor.visible = false;
+                }                    
+                if (Time.timeScale == 0f) {
                     Time.timeScale = 1f;                
                 } else {
                     Time.timeScale = 0f;
