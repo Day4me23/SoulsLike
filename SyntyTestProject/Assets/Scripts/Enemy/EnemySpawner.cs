@@ -13,7 +13,10 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < spawnPoint.Length; i++)
             {
-                enemiesOnFloor.Add(Instantiate(enemyPrefab, spawnPoint[i].transform.position, Quaternion.identity));
+                Vector3 direction = PlayerStateManager.instance.transform.position - spawnPoint[i].transform.position;
+                direction.y = 0;
+                Quaternion q = Quaternion.LookRotation(direction);
+                enemiesOnFloor.Add(Instantiate(enemyPrefab, spawnPoint[i].transform.position, q));
 
             }
             Debug.Log("Spawn Enemy");

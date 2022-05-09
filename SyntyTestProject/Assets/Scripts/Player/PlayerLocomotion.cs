@@ -157,7 +157,14 @@ public class PlayerLocomotion : MonoBehaviour
             myTransform.position = targetPosition;       
     }
     #endregion
-
+    private void FixedUpdate() {
+        if (playerStateManager.isInAir) {
+            rigidbody.velocity += Physics.gravity * Time.fixedDeltaTime; // In PhysX, Acceleration ignores mass
+            float rigidbodyDrag = Mathf.Clamp01(1.0f - (rigidbody.drag * Time.fixedDeltaTime));
+            rigidbody.velocity *= rigidbodyDrag;
+            transform.position += rigidbody.velocity * Time.fixedDeltaTime;
+        }
+    }
     public void HandleEstus() {
         if (inputHandler.estusFlag) {
             if(!playerStateManager.isInteracting && PlayerManager.instance.estusFlasks > 0) {

@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
     public StaminaBar staminaBar;
     public GameObject deathScreen;
     public bool dead = false;
+    bool invincible = false;
 
     public int estusFlasks = 4;
 
@@ -176,7 +177,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(float damage) 
     {
-        if (!dead) { //if not dead and health > 0, take damage, then check if dead
+        if (!dead && !invincible) { //if not dead and health > 0, take damage, then check if dead
             if (currentHealth > 0)
                 currentHealth -= damage;
             if (currentHealth > maxHealth)
@@ -189,7 +190,8 @@ public class PlayerManager : MonoBehaviour
         }        
     }
     public void UseStamina(float stamina) {
-        currentStamina -= stamina;
+        if(!PlayerStateManager.instance.isInteracting)
+            currentStamina -= stamina;
         if (currentStamina < 0f)
             currentStamina = 0;
         staminaBar.SetCurrentStamina(currentStamina);
@@ -203,6 +205,12 @@ public class PlayerManager : MonoBehaviour
     }
     public void CloseDamageCollider() {
         weapon.DisableDamageCollider();
+    }
+    public void StartIFrames() {
+        invincible = true;
+    }
+    public void StopIFrames() {
+        invincible = false;
     }
     public void Interact() {
         if (latestObject != null) {
