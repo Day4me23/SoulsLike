@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
     [SerializeField] private GameObject slotHolder;
+    PlayerAudio playerAudio;
     public List<Items> items = new List<Items>();
     [SerializeField] private Items itemToAdd;
     [SerializeField] private Items itemToRemove;
@@ -27,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     public float maxStamina = 100;
     [SerializeField] Text Text_health;
     [SerializeField] Text Text_damage;
-
+    public bool legendaryItemReached = false;
 
     public PlayerWeapon weapon;
     public List<GameObject> Chests;
@@ -65,6 +66,7 @@ public class PlayerManager : MonoBehaviour
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
+        playerAudio = GetComponent<PlayerAudio>();
         animatorHandler = GetComponent<AnimatorHandler>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth, currentHealth);
@@ -157,6 +159,7 @@ public class PlayerManager : MonoBehaviour
         if (equipment[(int)displayItem.gearType] != null)
             equipment[(int)displayItem.gearType].UnEquip();
         Debug.Log(displayItem);
+        playerAudio.Equip();
         displayItem.Equip();
         UpdateUI();
     }
@@ -213,6 +216,8 @@ public class PlayerManager : MonoBehaviour
         invincible = false;
     }
     public void Interact() {
+        if (legendaryItemReached)
+            SceneManager.LoadScene(0);
         if (latestObject != null) {
             latestObject.item.isEquipped = false;
             Add(latestObject.item);

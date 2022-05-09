@@ -36,7 +36,7 @@ public class EnemyLocomotionManager : MonoBehaviour
                 Vector3 targetDirection = playerManager.transform.position - transform.position;
                 float viewabelAngle = Vector3.Angle(targetDirection, transform.forward);
 
-                if(viewabelAngle > enemyManager.minimumDetectionAngle && viewabelAngle < enemyManager.maximumDetectionAngle) {
+                if((viewabelAngle > enemyManager.minimumDetectionAngle && viewabelAngle < enemyManager.maximumDetectionAngle) || distanceFromTarget < 1.5f) {
                     currentTarget = playerManager;
                 }
             }

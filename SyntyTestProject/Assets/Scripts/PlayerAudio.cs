@@ -10,7 +10,7 @@ public class PlayerAudio : MonoBehaviour
     public AudioClip heavyatk;
     public AudioClip land;
     public AudioClip heal;
-
+    public AudioClip equip;
 
     private AudioSource audioSource;
     
@@ -74,6 +74,9 @@ public class PlayerAudio : MonoBehaviour
 
             audioSource.PlayOneShot(land);
         }
+    }
+    public void Equip() {
+        audioSource.PlayOneShot(equip);
     }
     private AudioClip GetRandomClip()
     {

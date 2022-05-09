@@ -30,6 +30,7 @@ public class EnemyManager : MonoBehaviour {
             GetComponent<CapsuleCollider>().enabled = false;
             enemyLocomotionManager.navMeshAgent.enabled = false;
             enemyLocomotionManager.enemyRigidBody.useGravity = false;
+            enemyAnimatorManager.anim.SetFloat("Horizontal", 0f);
         }
 
     }
