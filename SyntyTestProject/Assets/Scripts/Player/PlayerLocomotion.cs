@@ -162,10 +162,9 @@ public class PlayerLocomotion : MonoBehaviour
         if (inputHandler.estusFlag) {
             if(!playerStateManager.isInteracting && PlayerManager.instance.estusFlasks > 0) {
                 PlayerManager.instance.estusFlasks -= 1;
-                PlayerManager.instance.TakeDamage(-66);
+                PlayerManager.instance.TakeDamage(PlayerManager.instance.maxHealth * -66f);
                 GameObject.Find("Consumable Count").GetComponent<TextMeshProUGUI>().text = PlayerManager.instance.estusFlasks.ToString();
                 animatorHandler.PlayTargetAnimation("Heal", true);
-               //Increase health, decrease flasks
             }
         }
     }

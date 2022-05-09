@@ -9,10 +9,8 @@ public class ItemObject : MonoBehaviour
     private void Start() {
         playerManager = PlayerManager.instance;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 6)
-        {
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.layer == 6) {
             playerManager.pickupPrompt.SetActive(true);
             playerManager.latestObject = this;            
         }

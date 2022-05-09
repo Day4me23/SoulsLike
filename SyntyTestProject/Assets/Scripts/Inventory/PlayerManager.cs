@@ -50,6 +50,17 @@ public class PlayerManager : MonoBehaviour
 
     AnimatorHandler animatorHandler;
 
+    [Header("Item Display")]
+    public Items displayItem;
+    public Text nameText;
+    public Text descriptionText;
+    public Text itemInfoText;
+    public Image itemImage;
+
+    private float staminaRegenRate = 45f;
+    private float staminaSprintRate = 11f;
+    private float staminaRegenTimer = .6f;
+
     //This is where you would send itemToAdd and Remove... NOT IN START
     private void Start()
     {
@@ -148,20 +159,6 @@ public class PlayerManager : MonoBehaviour
         displayItem.Equip();
         UpdateUI();
     }
-
-    [Header("Item Display")]
-    public Items displayItem;
-    public Text nameText;
-    public Text descriptionText;
-    public Text itemInfoText;
-    public Image itemImage;
-
-    private float staminaRegenRate = 45f;
-    private float staminaSprintRate = 11f;
-    private float staminaRegenTimer = .6f;
-
-    
-
     public void AddDisplay(int slotNum)
     {
         displayItem = items[slotNum];
@@ -170,15 +167,14 @@ public class PlayerManager : MonoBehaviour
     public void SetHealth(int add) 
     {
         if(add != 0) {
-            int oldmax = (int)maxHealth;
             maxHealth += add;
             currentHealth += add;
-            healthBar.SetMaxHealth(maxHealth, oldmax);
+            healthBar.SetMaxHealth(maxHealth, currentHealth);
         }
         
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(float damage) 
     {
         if (!dead) { //if not dead and health > 0, take damage, then check if dead
             if (currentHealth > 0)
@@ -207,6 +203,15 @@ public class PlayerManager : MonoBehaviour
     }
     public void CloseDamageCollider() {
         weapon.DisableDamageCollider();
+    }
+    public void Interact() {
+        if (latestObject != null) {
+            latestObject.item.isEquipped = false;
+            Add(latestObject.item);
+            Destroy(latestObject.gameObject);
+            latestObject = null;
+            pickupPrompt.SetActive(false);
+        }
     }
     IEnumerator OnDeath() {
         //play noise (through animator?)

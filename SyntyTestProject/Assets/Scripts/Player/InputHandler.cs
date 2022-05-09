@@ -42,6 +42,8 @@ public class InputHandler : MonoBehaviour
             inputActions.PlayerActions.UseItem.performed += ctx => estusFlag = true;
             inputActions.PlayerActions.RightWeaponLightAttack.performed += ctx => la_Input = true;
             inputActions.PlayerActions.RightWeaponHeavyAttack.performed += ctx => ha_Input = true;
+            inputActions.PlayerActions.Interact.performed += ctx => PlayerManager.instance.Interact();
+
             inputActions.PlayerActions.Menu.performed += ctx => {
                 menu.SetActive(!menu.activeInHierarchy);
                 if(Cursor.lockState == CursorLockMode.Locked) {
@@ -57,17 +59,6 @@ public class InputHandler : MonoBehaviour
                     Time.timeScale = 0f;
                 }
             };
-            inputActions.PlayerActions.Interact.performed += ctx => {
-                ItemObject io = PlayerManager.instance.latestObject;
-                if (io != null) {
-                    io.item.isEquipped = false;
-                    PlayerManager.instance.Add(io.item);
-                    Destroy(io.gameObject);
-                    PlayerManager.instance.latestObject = null;
-                    PlayerManager.instance.pickupPrompt.SetActive(false);
-                }                
-            };
-
         }
         inputActions.Enable();
     }
