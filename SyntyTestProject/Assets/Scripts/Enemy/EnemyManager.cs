@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour {
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
     public bool isPreformingAction;
+    Slider slider;
     bool dead = false;
 
     [Header("Stats")]
@@ -15,18 +17,26 @@ public class EnemyManager : MonoBehaviour {
     public float maximumDetectionAngle = 50;
     public float minimumDetectionAngle = -50;
 
+    public GameObject hpbar;
+
 
     private void Awake() {
         enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+        slider = hpbar.GetComponent<Slider>();
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
         enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
     }
     public void TakeDamage(float damage) {
         currentHealth -= damage;
-
+        if (currentHealth < maxHealth)
+            hpbar.SetActive(true);
+        slider.value = currentHealth;
         if (currentHealth <= 0) {
             enemyAnimatorManager.PlayTargetAnimation("Death", true);
             dead = true;
-            Destroy(this.gameObject, 10f);
+            Destroy(this.gameObject, 5f);
+            Destroy(hpbar, 1f);
             GetComponent<CapsuleCollider>().enabled = false;
             enemyLocomotionManager.navMeshAgent.enabled = false;
             enemyLocomotionManager.enemyRigidBody.useGravity = false;
