@@ -348,7 +348,7 @@ public partial class @Character : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d053157c-b8ea-4c1c-8209-d0108fd64d5e"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

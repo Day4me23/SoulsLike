@@ -11,7 +11,8 @@
                     "id": "d548751f-9d03-47c1-8499-0a5ce4f91847",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Look",
@@ -19,7 +20,8 @@
                     "id": "9ba2bfaa-21c6-41ed-990e-99867ff33b02",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -123,7 +125,8 @@
                     "id": "1b87e291-4221-4025-84b6-f3c795bdea55",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Sprint",
@@ -131,7 +134,8 @@
                     "id": "2380ee82-259b-4987-be19-99a615d30e8d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Use Item",
@@ -139,7 +143,8 @@
                     "id": "8255132c-047e-4ae8-8ca5-a1aee4ba0297",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Right Weapon Light Attack",
@@ -147,7 +152,8 @@
                     "id": "1e94f0db-bc8d-45fe-a383-a65b21b4522e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Right Weapon Heavy Attack",
@@ -155,7 +161,8 @@
                     "id": "161beb86-30eb-443c-bba4-a790b6cf15ef",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact",
@@ -163,7 +170,8 @@
                     "id": "044aabbd-effc-462a-8ee9-343ef2d5f5d1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Block/Left Weapon Light Attack",
@@ -171,7 +179,8 @@
                     "id": "df1e081d-0742-49eb-a98f-4d63fd1b4b40",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Parry/Left Weapon Heavy Attack",
@@ -179,7 +188,8 @@
                     "id": "2f462ed3-0dc9-488d-b95b-59d5e22806c5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Menu",
@@ -187,7 +197,8 @@
                     "id": "65d3cd39-3588-4324-b17f-216b0ac1eb3a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -315,7 +326,7 @@
                 {
                     "name": "",
                     "id": "d053157c-b8ea-4c1c-8209-d0108fd64d5e",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

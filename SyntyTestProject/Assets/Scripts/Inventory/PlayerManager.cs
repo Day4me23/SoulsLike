@@ -104,10 +104,10 @@ public class PlayerManager : MonoBehaviour
     public void RefreshUI()
     {
         for (int i = 0; i < slots.Length; i++) {
-            try {
+            if(items.Count > i && items[i] != null) {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemIcon;
-            } catch {
+            } else {
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
             }

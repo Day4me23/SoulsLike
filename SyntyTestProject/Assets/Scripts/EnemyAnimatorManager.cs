@@ -15,7 +15,8 @@ public class EnemyAnimatorManager : AnimatorManager
         enemyLocomotionManager.enemyRigidBody.drag = 0;
         Vector3 deltaPosition = anim.deltaPosition;
         deltaPosition.y = 0;
-        enemyLocomotionManager.enemyRigidBody.velocity = deltaPosition / Time.deltaTime;
+        if (deltaPosition != Vector3.zero)
+            enemyLocomotionManager.enemyRigidBody.velocity = deltaPosition / Time.deltaTime;
     }
     public void OpenDamageCollider() {
         weapon.EnableDamageCollider();

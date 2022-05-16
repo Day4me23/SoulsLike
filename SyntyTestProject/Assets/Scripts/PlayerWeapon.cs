@@ -31,7 +31,7 @@ public class PlayerWeapon : MonoBehaviour
         hasHitPlayer = false;
     }
     private void OnTriggerStay(Collider other) {
-        if(gameObject.layer == 10) {
+         if(gameObject.layer == 10) {
             PlayerManager playerStats = other.GetComponentInParent<PlayerManager>();
             if (playerStats != null) {
                 if (other.gameObject.layer == 7 && !hasHitPlayer) {
